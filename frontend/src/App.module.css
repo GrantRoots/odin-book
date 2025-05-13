@@ -1,0 +1,35 @@
+.header {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main {
+  background-color: rgb(41, 42, 45);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+}
+
+.button {
+  height: 3rem;
+  width: 7rem;
+  margin: 1rem;
+  font-size: 1.1rem;
+}
+
+.room {
+  background-color: white;
+  padding: 4%;
+  border-radius: 25%;
+  min-height: 5rem;
+  min-width: 9rem;
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
