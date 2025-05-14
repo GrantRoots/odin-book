@@ -1,9 +1,9 @@
 const db = require("../queries/posts");
 const { body, validationResult } = require("express-validator");
 
-async function getUsersPosts(req, res, next) {
+async function getUserAndFollowingPosts(req, res, next) {
   try {
-    const data = await db.getPostsById(req.query.id);
+    const data = await db.getUserAndFollowingPosts(req.query.id);
     return res.json({
       success: true,
       posts: data,
@@ -85,7 +85,7 @@ const createPost = [
 // }
 
 module.exports = {
-  getUsersPosts,
+  getUserAndFollowingPosts,
   createPost,
   //   sendMessage,
   //   getRoom,

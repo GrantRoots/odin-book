@@ -1,39 +1,30 @@
 const prisma = require("../prisma");
-const { all } = require("../routes/posts");
 
-async function getPostsById(id) {
+async function getUserAndFollowingPosts(id) {
   id = parseInt(id);
   try {
     //get all users posts
-    const usersPosts = await prisma.post.findMany({
+    const user = await prisma.user.findUnique({
       where: {
-        userId: id,
+        id: id,
       },
     });
 
     //find following posts
-    const following = await prisma.user.findUnique({
-      where: {
-        id: id,
-      },
-      include: {
-        following: true,
-      },
-    });
-    const allFollowingPosts = following.following.map(async (follow) => {
-      let posts = await prisma.user.findMany({
+    const followingPosts = user.following.map(async (follow) => {
+      const followData = await prisma.user.findUnique({
         where: {
-          id: follow,
+          id: parseInt(follow),
         },
-        include: {
+        select: {
           posts: true,
         },
       });
-      return posts.posts;
+      return followData.posts;
     });
 
     //combine both and sort by date/time
-    const allPosts = usersPosts.concat(allFollowingPosts);
+    const allPosts = [...followingPosts, ...user.posts];
     // const sortedPosts = allPosts.sort;
   } catch (error) {
     throw error;
@@ -97,7 +88,7 @@ async function createPost(content, id) {
 // }
 
 module.exports = {
-  getPostsById,
+  getUserAndFollowingPosts,
   //   findUserId,
   createPost,
   //   sendMessage,

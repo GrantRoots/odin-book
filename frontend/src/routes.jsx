@@ -3,6 +3,7 @@ import { Login } from "./components/Login/Login";
 import { Signup } from "./components/Signup/Signup";
 import { Customize } from "./components/Customize/Customize";
 import { CreatePost } from "./components/CreatePost/CreatePost";
+import { FollowReqs } from "./components/FollowReqs/FollowReqs";
 
 const routes = [
   {
@@ -24,6 +25,10 @@ const routes = [
   {
     path: "create",
     element: <CreatePost />,
+  },
+  {
+    path: "requests",
+    element: <FollowReqs />,
   },
 ];
 

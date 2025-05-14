@@ -23,4 +23,50 @@ async function updateProfile(newUsername, oldUsername) {
   });
 }
 
-module.exports = { signUp, updateProfile };
+async function getAllUsers() {
+  return await prisma.user.findMany();
+}
+
+async function sendFollowReq(followId, senderId) {
+  followId = parseInt(followId);
+
+  const user = await prisma.user.findUnique({
+    where: {
+      id: followId,
+    },
+    select: {
+      followRequests: true,
+    },
+  });
+
+  if (user.followRequests.includes(senderId)) {
+    return false;
+  }
+
+  await prisma.user.update({
+    where: {
+      id: followId,
+    },
+    data: {
+      followRequests: [...user.followRequests, senderId],
+    },
+  });
+  return true;
+}
+
+async function getReqs(id) {
+  try {
+    return await prisma.user.findUnique({
+      where: {},
+    });
+  } catch (error) {
+    throw error;
+  }
+}
+
+module.exports = {
+  signUp,
+  updateProfile,
+  getAllUsers,
+  sendFollowReq,
+};

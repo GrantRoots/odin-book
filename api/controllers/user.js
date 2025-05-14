@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const db = require("../queries/user");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
+const { user } = require("../prisma");
 
 const validateUser = [
   body("username").trim().notEmpty().escape(),
@@ -92,8 +93,50 @@ const updateProfile = [
   },
 ];
 
+async function getAllUsers(req, res, next) {
+  try {
+    const users = await db.getAllUsers();
+    return res.json({
+      success: true,
+      users: users,
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function sendFollowReq(req, res, next) {
+  try {
+    const success = await db.sendFollowReq(
+      req.body.followId,
+      req.body.senderId
+    );
+    if (!success) {
+      return res.json({
+        success: false,
+        message: "Already sent follow request",
+      });
+    }
+    return res.json({
+      success: true,
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function getReqs(req, res, next) {
+  try {
+    const reqs = await db.getReqs(req.query.id);
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   signUp,
   logIn,
   updateProfile,
+  getAllUsers,
+  sendFollowReq,
 };

@@ -5,11 +5,17 @@ import { useEffect, useState } from "react";
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [posts, setPosts] = useState(null);
+  const [allUsers, setAllUsers] = useState(null);
+  const [error, setError] = useState(null);
   const username = localStorage.getItem("username");
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
 
-  async function getAllPosts() {
+  useEffect(() => {
+    if (token) setLoggedIn(true);
+  }, []);
+
+  async function getUserAndFollowingPosts() {
     try {
       const response = await fetch(`http://localhost:3000/posts?id=${userId}`, {
         mode: "cors",
@@ -25,13 +31,52 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    if (token && username) setLoggedIn(true);
-  }, [token]);
+  async function getAllUsers() {
+    try {
+      const response = await fetch(`http://localhost:3000/user`, {
+        mode: "cors",
+      });
+      if (!response.ok) return;
+      const data = await response.json();
+      setAllUsers(data.users);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   useEffect(() => {
-    getAllPosts();
-  }, []);
+    if (loggedIn) {
+      getUserAndFollowingPosts();
+      getAllUsers();
+    }
+  }, [loggedIn]);
+
+  async function sendFollowReq(followId) {
+    try {
+      setError(null);
+      const data = {
+        senderId: userId,
+        followId: followId,
+      };
+
+      const response = await fetch("http://localhost:3000/user/follow", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+        mode: "cors",
+      });
+      const responseData = await response.json();
+
+      if (!responseData.success) {
+        setError(responseData.message);
+      }
+    } catch (err) {
+      console.error("Network or server error:", err);
+    }
+  }
 
   return (
     <>
@@ -42,6 +87,9 @@ function App() {
             <div>{username} Is Logged In</div>
             <Link to={"customize"}>
               <button className={styles.button}>Customize Profile</button>
+            </Link>
+            <Link to={"requests"}>
+              <button className={styles.button}>Follow Requests</button>
             </Link>
           </div>
         )}
@@ -63,13 +111,37 @@ function App() {
         )}
 
         {loggedIn && (
-          <div>
-            <button>Find New People</button>
-            <Link to={"create"}>
-              <button>Create Post</button>
-            </Link>
+          <div className={styles.loggedInContainer}>
+            <div>
+              <Link to={"create"}>
+                <button>Create Post</button>
+              </Link>
 
-            {posts && <div>Posts</div>}
+              {/* {posts &&
+                posts.map((post) => {
+                  return <div>{post.content}</div>;
+                })} */}
+            </div>
+            <div>
+              <div>People To Follow</div>
+              {error && <div>{error}</div>}
+              {allUsers &&
+                allUsers.map((user) => {
+                  if (user.id !== parseInt(userId))
+                    return (
+                      <div key={user.id}>
+                        <div>{user.username}</div>
+                        <button
+                          onClick={() => {
+                            sendFollowReq(user.id);
+                          }}
+                        >
+                          Follow
+                        </button>
+                      </div>
+                    );
+                })}
+            </div>
           </div>
         )}
       </main>

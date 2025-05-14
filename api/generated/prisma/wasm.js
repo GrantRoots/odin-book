@@ -135,13 +135,8 @@ exports.Prisma.UserScalarFieldEnum = {
   lastName: 'lastName',
   profilePic: 'profilePic',
   bio: 'bio',
-  followRequests: 'followRequests'
-};
-
-exports.Prisma.FollowingScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  usernames: 'usernames'
+  followRequests: 'followRequests',
+  following: 'following'
 };
 
 exports.Prisma.PostScalarFieldEnum = {
@@ -179,7 +174,6 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   Session: 'Session',
   User: 'User',
-  Following: 'Following',
   Post: 'Post',
   Comment: 'Comment'
 };
