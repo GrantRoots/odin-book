@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
 import { useState } from "react";
+import styles from "./Signup.module.css";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 function Signup() {
@@ -33,8 +34,9 @@ function Signup() {
   }
 
   return (
-    <>
-      <form onSubmit={onSubmit}>
+    <div className={styles.container}>
+      <h1>Sign Up</h1>
+      <form onSubmit={onSubmit} className={styles.form}>
         <label htmlFor="username">Username: </label>
         <input type="text" name="username" required />
 
@@ -56,7 +58,7 @@ function Signup() {
       <Link to={"/"}>
         <button>Home</button>
       </Link>
-    </>
+    </div>
   );
 }
 

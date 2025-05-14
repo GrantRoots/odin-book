@@ -21,22 +21,38 @@ model User {
   password String
   firstName String @db.VarChar(255)
   lastName String @db.VarChar(255)
-  messages Message[]
-  chatrooms Chatroom[]
+  profilePic String? //could have default
+  bio String?
+  followRequests String[]
+  following Following[]
+  posts Post[]
+  comments Comment[]
 }
 
-model Chatroom {
+model Following {
   id Int @id @default(autoincrement())
-  users User[]
-  messages Message[]
-}
-
-model Message {
-  id Int @id @default(autoincrement())
-  content String @db.VarChar(1000)
-  createdAt DateTime @default(now())
   user User @relation(fields: [userId], references: [id])
   userId Int
-  chatroom  Chatroom @relation(fields: [chatroomId], references: [id])
-  chatroomId Int
+  usernames String[]
 }
+
+model Post{
+  id Int @id @default(autoincrement())
+  caption String @db.VarChar(1000)
+  createdAt DateTime @default(now())
+  likes Int
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  comments Comment[]
+}
+
+model Comment {
+  id Int @id @default(autoincrement())
+  text String @db.VarChar(255)
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  post Post @relation(fields: [postId], references: [id])
+  postId Int
+  createdAt DateTime @default(now())
+}
+

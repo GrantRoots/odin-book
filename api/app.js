@@ -7,6 +7,7 @@ const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
 const { PrismaClient } = require("./generated/prisma");
 const prisma = require("./prisma");
 const cors = require("cors");
+require("dotenv").config();
 
 const userRouter = require("./routes/user");
 const chatroomsRouter = require("./routes/chatrooms");

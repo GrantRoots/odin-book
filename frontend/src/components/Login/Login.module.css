@@ -1,0 +1,15 @@
+.container {
+  padding: 5rem;
+  color: white;
+  background-color: rgb(63, 64, 67);
+  height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}

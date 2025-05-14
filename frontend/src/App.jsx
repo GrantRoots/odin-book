@@ -3,80 +3,49 @@ import styles from "./App.module.css";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [chatrooms, setChatrooms] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const username = localStorage.getItem("username");
-
-  async function findUserChatrooms() {
-    const token = localStorage.getItem("token");
-    const userId = localStorage.getItem("userId");
-
-    if (token && !loggedIn) setLoggedIn(true);
-    try {
-      const response = await fetch("http://localhost:3000/chatrooms", {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ userId }),
-      });
-      if (!response.ok) return;
-      const data = await response.json();
-      setChatrooms(data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
-    findUserChatrooms();
-  }, []);
+    if (token && username) setLoggedIn(true);
+  }, [token]);
 
   return (
     <>
       <header className={styles.header}>
-        <Link to={"signup"}>
-          <button className={styles.button}>Sign Up</button>
-        </Link>
-        <Link to={"login"}>
-          <button className={styles.button}>Log In</button>
-        </Link>
+        <h1>Odinstagram</h1>
         {loggedIn && (
-          <>
+          <div>
             <div>{username} Is Logged In</div>
-            <Link to={"message"}>
-              <button className={styles.button}>Send A New Message</button>
-            </Link>
             <Link to={"customize"}>
               <button className={styles.button}>Customize Profile</button>
             </Link>
-          </>
+          </div>
         )}
       </header>
       <main className={styles.main}>
-        {chatrooms.length > 0 && (
+        {!loggedIn && (
           <div>
-            {chatrooms.map((room) => {
-              return (
-                <div key={room.id} className={styles.room}>
-                  <div>
-                    {room.users[0].username === username
-                      ? room.users[1].username
-                      : room.users[0].username}
-                    's Chatroom
-                  </div>
-                  <Link to={`room/${room.id}`}>
-                    <button>Open</button>
-                  </Link>
-                </div>
-              );
-            })}
+            <div>
+              <Link to={"signup"}>
+                <button className={styles.button}>Sign Up</button>
+              </Link>
+              <Link to={"login"}>
+                <button className={styles.button}>Log In</button>
+              </Link>
+            </div>
+            <h1>Welcome To Odinstagram!</h1>
+            <h2>Sign Up To Get Started</h2>
           </div>
         )}
-        {chatrooms.length < 1 && (
-          <div>No chatrooms yet click "Send A New Message" to get started!</div>
+
+        {loggedIn && (
+          <div>
+            <button>Find New People</button>
+            <button>Create Post</button>
+            <div>Show Posts from following and self</div>
+          </div>
         )}
       </main>
     </>

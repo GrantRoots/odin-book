@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import styles from "./Login.module.css";
 
 function Login() {
   const [error, setError] = useState(null);
@@ -37,7 +38,8 @@ function Login() {
   }
 
   return (
-    <>
+    <div className={styles.container}>
+      <h1>Login</h1>
       <form onSubmit={handleLogin}>
         <label htmlFor="username">Username: </label>
         <input type="text" name="username" />
@@ -49,7 +51,7 @@ function Login() {
       <Link to={"/"}>
         <button>Home</button>
       </Link>
-    </>
+    </div>
   );
 }
 
