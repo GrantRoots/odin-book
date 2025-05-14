@@ -146,7 +146,7 @@ exports.Prisma.FollowingScalarFieldEnum = {
 
 exports.Prisma.PostScalarFieldEnum = {
   id: 'id',
-  caption: 'caption',
+  content: 'content',
   createdAt: 'createdAt',
   likes: 'likes',
   userId: 'userId'

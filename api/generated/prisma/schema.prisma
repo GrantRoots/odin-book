@@ -21,7 +21,7 @@ model User {
   password       String
   firstName      String      @db.VarChar(255)
   lastName       String      @db.VarChar(255)
-  profilePic     String? //could have default
+  profilePic     String?
   bio            String?
   followRequests String[]
   following      Following[]
@@ -38,9 +38,9 @@ model Following {
 
 model Post {
   id        Int       @id @default(autoincrement())
-  caption   String    @db.VarChar(1000)
+  content   String    @db.VarChar(1000)
   createdAt DateTime  @default(now())
-  likes     Int
+  likes     Int       @default(0)
   user      User      @relation(fields: [userId], references: [id])
   userId    Int
   comments  Comment[]

@@ -10,7 +10,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 const userRouter = require("./routes/user");
-const chatroomsRouter = require("./routes/chatrooms");
+const postsRouter = require("./routes/posts");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -78,7 +78,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use("/user", userRouter);
-app.use("/chatrooms", chatroomsRouter);
+app.use("/posts", postsRouter);
 
 app.use((err, req, res, next) => {
   console.error(err);

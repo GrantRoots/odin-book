@@ -1,9 +1,8 @@
 import App from "./App";
 import { Login } from "./components/Login/Login";
-import { NewMessage } from "./components/NewMessage/NewMessage";
 import { Signup } from "./components/Signup/Signup";
-import { Chatroom } from "./components/Chatroom/Chatroom";
 import { Customize } from "./components/Customize/Customize";
+import { CreatePost } from "./components/CreatePost/CreatePost";
 
 const routes = [
   {
@@ -19,16 +18,12 @@ const routes = [
     element: <Signup />,
   },
   {
-    path: "message",
-    element: <NewMessage />,
-  },
-  {
-    path: "room/:roomId",
-    element: <Chatroom />,
-  },
-  {
     path: "customize",
     element: <Customize />,
+  },
+  {
+    path: "create",
+    element: <CreatePost />,
   },
 ];
 

@@ -4,12 +4,34 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [posts, setPosts] = useState(null);
   const username = localStorage.getItem("username");
+  const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
+
+  async function getAllPosts() {
+    try {
+      const response = await fetch(`http://localhost:3000/posts?id=${userId}`, {
+        mode: "cors",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) return;
+      const data = await response.json();
+      setPosts(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   useEffect(() => {
     if (token && username) setLoggedIn(true);
   }, [token]);
+
+  useEffect(() => {
+    getAllPosts();
+  }, []);
 
   return (
     <>
@@ -43,8 +65,11 @@ function App() {
         {loggedIn && (
           <div>
             <button>Find New People</button>
-            <button>Create Post</button>
-            <div>Show Posts from following and self</div>
+            <Link to={"create"}>
+              <button>Create Post</button>
+            </Link>
+
+            {posts && <div>Posts</div>}
           </div>
         )}
       </main>
