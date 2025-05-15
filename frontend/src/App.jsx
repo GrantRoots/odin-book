@@ -81,6 +81,8 @@ function App() {
     }
   }
 
+  async function likePost() {}
+
   return (
     <>
       <header className={styles.header}>
@@ -124,7 +126,20 @@ function App() {
               )}
               {posts &&
                 posts.map((post) => {
-                  return <div key={post.id}>{post.content}</div>;
+                  return (
+                    <div key={post.id}>
+                      <div>{post.username}</div>
+                      <div>{post.content}</div>
+                      <div>Likes: {post.likes}</div>
+                      <div>
+                        {new Date(post.createdAt).toLocaleTimeString([], {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                      </div>
+                      <button>Like</button>
+                    </div>
+                  );
                 })}
             </div>
             <div>

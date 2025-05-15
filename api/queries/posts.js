@@ -9,8 +9,15 @@ async function getUserAndFollowingPosts(id) {
         id: id,
       },
       include: {
-        posts: true,
+        posts: {
+          include: {
+            comments: true,
+          },
+        },
       },
+    });
+    const userPostsWithUsername = user.posts.map((post) => {
+      return { ...post, username: user.username };
     });
 
     //find following posts
@@ -21,15 +28,22 @@ async function getUserAndFollowingPosts(id) {
             id: parseInt(follow),
           },
           include: {
-            posts: true,
+            posts: {
+              include: {
+                comments: true,
+              },
+            },
           },
         });
-        return followData.posts;
+        const followingPostsWithUsername = followData.posts.map((post) => {
+          return { ...post, username: followData.username };
+        });
+        return followingPostsWithUsername;
       })
     );
 
     //combine both and sort by date/time
-    const allPosts = [...followingPosts.flat(), ...user.posts];
+    const allPosts = [...followingPosts.flat(), ...userPostsWithUsername];
     const sortedPosts = allPosts.sort(
       (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
     );
