@@ -40,14 +40,15 @@ async function getNotFollowing(id) {
         id: id,
       },
     });
-
     const allUsers = await prisma.user.findMany();
     const notFollowing = allUsers.filter((user) => {
-      if (!userFollowing.following.includes(user.id)) {
+      if (
+        !userFollowing.following.includes(user.id.toString()) &&
+        user.id !== userFollowing.id
+      ) {
         return user;
       }
     });
-    //it takes out the user in the app.jsx
     return notFollowing;
   } catch (error) {
     throw error;

@@ -8,23 +8,29 @@ async function getUserAndFollowingPosts(id) {
       where: {
         id: id,
       },
+      include: {
+        posts: true,
+      },
     });
 
     //find following posts
-    const followingPosts = user.following.map(async (follow) => {
-      const followData = await prisma.user.findUnique({
-        where: {
-          id: parseInt(follow),
-        },
-        select: {
-          posts: true,
-        },
-      });
-      return followData.posts;
-    });
+    const followingPosts = await Promise.all(
+      user.following.map(async (follow) => {
+        const followData = await prisma.user.findUnique({
+          where: {
+            id: parseInt(follow),
+          },
+          include: {
+            posts: true,
+          },
+        });
+        return followData.posts;
+      })
+    );
 
     //combine both and sort by date/time
     const allPosts = [...followingPosts, ...user.posts];
+    // console.log(allPosts);
     // const sortedPosts = allPosts.sort;
   } catch (error) {
     throw error;

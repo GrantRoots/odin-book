@@ -132,19 +132,18 @@ function App() {
               {error && <div>{error}</div>}
               {notFollowing &&
                 notFollowing.map((user) => {
-                  if (user.id !== parseInt(userId))
-                    return (
-                      <div key={user.id}>
-                        <div>{user.username}</div>
-                        <button
-                          onClick={() => {
-                            sendFollowReq(user.id);
-                          }}
-                        >
-                          Follow
-                        </button>
-                      </div>
-                    );
+                  return (
+                    <div key={user.id}>
+                      <div>{user.username}</div>
+                      <button
+                        onClick={() => {
+                          sendFollowReq(user.id);
+                        }}
+                      >
+                        Follow
+                      </button>
+                    </div>
+                  );
                 })}
             </div>
           </div>
