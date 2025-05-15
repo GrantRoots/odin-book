@@ -93,9 +93,9 @@ const updateProfile = [
   },
 ];
 
-async function getAllUsers(req, res, next) {
+async function getNotFollowing(req, res, next) {
   try {
-    const users = await db.getAllUsers();
+    const users = await db.getNotFollowing(req.query.id);
     return res.json({
       success: true,
       users: users,
@@ -128,6 +128,38 @@ async function sendFollowReq(req, res, next) {
 async function getReqs(req, res, next) {
   try {
     const reqs = await db.getReqs(req.query.id);
+    if (!reqs) {
+      return res.json({
+        success: false,
+        message: "Failed to get requests",
+      });
+    }
+    return res.json({
+      success: true,
+      reqs: reqs,
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function acceptReq(req, res, next) {
+  try {
+    await db.acceptReq(req.body.username, req.body.userId);
+    return res.json({
+      success: true,
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function declineReq(req, res, next) {
+  try {
+    await db.declineReq(req.body.username, req.body.userId);
+    return res.json({
+      success: true,
+    });
   } catch (error) {
     next(error);
   }
@@ -137,6 +169,9 @@ module.exports = {
   signUp,
   logIn,
   updateProfile,
-  getAllUsers,
+  getNotFollowing,
   sendFollowReq,
+  getReqs,
+  acceptReq,
+  declineReq,
 };

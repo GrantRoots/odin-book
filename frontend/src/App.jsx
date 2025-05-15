@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [posts, setPosts] = useState(null);
-  const [allUsers, setAllUsers] = useState(null);
+  const [posts, setPosts] = useState([]);
+  const [notFollowing, setNotFollowing] = useState(null);
   const [error, setError] = useState(null);
   const username = localStorage.getItem("username");
   const userId = localStorage.getItem("userId");
@@ -31,14 +31,17 @@ function App() {
     }
   }
 
-  async function getAllUsers() {
+  async function getNotFollowing() {
     try {
-      const response = await fetch(`http://localhost:3000/user`, {
+      const response = await fetch(`http://localhost:3000/user?id=${userId}`, {
         mode: "cors",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
       if (!response.ok) return;
       const data = await response.json();
-      setAllUsers(data.users);
+      setNotFollowing(data.users);
     } catch (error) {
       console.error(error);
     }
@@ -47,7 +50,7 @@ function App() {
   useEffect(() => {
     if (loggedIn) {
       getUserAndFollowingPosts();
-      getAllUsers();
+      getNotFollowing();
     }
   }, [loggedIn]);
 
@@ -116,7 +119,9 @@ function App() {
               <Link to={"create"}>
                 <button>Create Post</button>
               </Link>
-
+              {posts.length < 1 && (
+                <div>No posts yet create one or follow some people :)</div>
+              )}
               {/* {posts &&
                 posts.map((post) => {
                   return <div>{post.content}</div>;
@@ -125,8 +130,8 @@ function App() {
             <div>
               <div>People To Follow</div>
               {error && <div>{error}</div>}
-              {allUsers &&
-                allUsers.map((user) => {
+              {notFollowing &&
+                notFollowing.map((user) => {
                   if (user.id !== parseInt(userId))
                     return (
                       <div key={user.id}>
