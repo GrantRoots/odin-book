@@ -12,6 +12,11 @@ postsRouter.post(
   passport.authenticate("jwt", { session: false }),
   postsController.createPost
 );
+postsRouter.post(
+  "/like",
+  passport.authenticate("jwt", { session: false }),
+  postsController.likePost
+);
 // postsRouter.get(
 //   "/:postId",
 //   passport.authenticate("jwt", { session: false }),

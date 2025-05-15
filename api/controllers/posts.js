@@ -39,7 +39,19 @@ const createPost = [
   },
 ];
 
+async function likePost(req, res, next) {
+  try {
+    await db.likePost(req.body.postId);
+    return res.json({
+      success: true,
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   getUserAndFollowingPosts,
   createPost,
+  likePost,
 };

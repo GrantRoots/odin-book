@@ -67,7 +67,23 @@ async function createPost(content, id) {
   }
 }
 
+async function likePost(id) {
+  id = parseInt(id);
+
+  await prisma.post.update({
+    where: {
+      id: id,
+    },
+    data: {
+      likes: {
+        increment: 1,
+      },
+    },
+  });
+}
+
 module.exports = {
   getUserAndFollowingPosts,
   createPost,
+  likePost,
 };

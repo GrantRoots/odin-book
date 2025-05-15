@@ -81,7 +81,26 @@ function App() {
     }
   }
 
-  async function likePost() {}
+  async function likePost(id) {
+    try {
+      const data = {
+        postId: id,
+      };
+
+      await fetch("http://localhost:3000/posts/like", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+        mode: "cors",
+      });
+      getUserAndFollowingPosts();
+    } catch (err) {
+      console.error("Network or server error:", err);
+    }
+  }
 
   return (
     <>
@@ -121,6 +140,7 @@ function App() {
               <Link to={"create"}>
                 <button>Create Post</button>
               </Link>
+              <h1>Your Feed</h1>
               {posts.length < 1 && (
                 <div>No posts yet create one or follow some people :)</div>
               )}
@@ -128,7 +148,7 @@ function App() {
                 posts.map((post) => {
                   return (
                     <div key={post.id}>
-                      <div>{post.username}</div>
+                      <div>{post.username} "Link to user profile"</div>
                       <div>{post.content}</div>
                       <div>Likes: {post.likes}</div>
                       <div>
@@ -137,7 +157,13 @@ function App() {
                           minute: "2-digit",
                         })}
                       </div>
-                      <button>Like</button>
+                      <button
+                        onClick={() => {
+                          likePost(post.id);
+                        }}
+                      >
+                        Like
+                      </button>
                     </div>
                   );
                 })}
