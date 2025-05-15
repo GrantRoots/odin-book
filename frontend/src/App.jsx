@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [posts, setPosts] = useState([]);
-  const [notFollowing, setNotFollowing] = useState(null);
+  const [notFollowing, setNotFollowing] = useState([]);
   const [error, setError] = useState(null);
   const username = localStorage.getItem("username");
   const userId = localStorage.getItem("userId");
@@ -25,7 +25,7 @@ function App() {
       });
       if (!response.ok) return;
       const data = await response.json();
-      setPosts(data);
+      setPosts(data.posts);
     } catch (error) {
       console.error(error);
     }
@@ -122,14 +122,15 @@ function App() {
               {posts.length < 1 && (
                 <div>No posts yet create one or follow some people :)</div>
               )}
-              {/* {posts &&
+              {posts &&
                 posts.map((post) => {
-                  return <div>{post.content}</div>;
-                })} */}
+                  return <div key={post.id}>{post.content}</div>;
+                })}
             </div>
             <div>
               <div>People To Follow</div>
               {error && <div>{error}</div>}
+              {notFollowing.length < 1 && <div>Nobody to follow :(</div>}
               {notFollowing &&
                 notFollowing.map((user) => {
                   return (

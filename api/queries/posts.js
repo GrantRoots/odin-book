@@ -29,25 +29,15 @@ async function getUserAndFollowingPosts(id) {
     );
 
     //combine both and sort by date/time
-    const allPosts = [...followingPosts, ...user.posts];
-    // console.log(allPosts);
-    // const sortedPosts = allPosts.sort;
+    const allPosts = [...followingPosts.flat(), ...user.posts];
+    const sortedPosts = allPosts.sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
+    return sortedPosts;
   } catch (error) {
     throw error;
   }
 }
-
-// async function findUserId(username) {
-//   try {
-//     return await prisma.user.findUnique({
-//       where: {
-//         username: username,
-//       },
-//     });
-//   } catch (error) {
-//     throw error;
-//   }
-// }
 
 async function createPost(content, id) {
   id = parseInt(id);
@@ -63,40 +53,7 @@ async function createPost(content, id) {
   }
 }
 
-// async function sendMessage(message, roomId, userId) {
-//   try {
-//     await prisma.message.create({
-//       data: {
-//         content: message,
-//         userId: parseInt(userId),
-//         chatroomId: parseInt(roomId),
-//       },
-//     });
-//   } catch (error) {
-//     throw error;
-//   }
-// }
-
-// async function getRoom(roomId) {
-//   try {
-//     return await prisma.chatroom.findUnique({
-//       where: {
-//         id: parseInt(roomId),
-//       },
-//       include: {
-//         users: true,
-//         messages: true,
-//       },
-//     });
-//   } catch (error) {
-//     throw error;
-//   }
-// }
-
 module.exports = {
   getUserAndFollowingPosts,
-  //   findUserId,
   createPost,
-  //   sendMessage,
-  //   getRoom,
 };
