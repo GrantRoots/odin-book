@@ -4,6 +4,7 @@ import { Signup } from "./components/Signup/Signup";
 import { Customize } from "./components/Customize/Customize";
 import { CreatePost } from "./components/CreatePost/CreatePost";
 import { FollowReqs } from "./components/FollowReqs/FollowReqs";
+import { Post } from "./components/Post/Post";
 
 const routes = [
   {
@@ -29,6 +30,10 @@ const routes = [
   {
     path: "requests",
     element: <FollowReqs />,
+  },
+  {
+    path: "post/:postId",
+    element: <Post />,
   },
 ];
 

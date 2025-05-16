@@ -108,7 +108,7 @@ function App() {
         <h1>Odinstagram</h1>
         {loggedIn && (
           <div>
-            <div>{username} Is Logged In</div>
+            <div>{username}</div>
             <Link to={"customize"}>
               <button className={styles.button}>Customize Profile</button>
             </Link>
@@ -164,6 +164,10 @@ function App() {
                       >
                         Like
                       </button>
+                      <Link to={`post/${post.id}`}>
+                        <button>View Comments</button>
+                        <button>Comment</button>
+                      </Link>
                     </div>
                   );
                 })}

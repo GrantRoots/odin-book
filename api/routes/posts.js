@@ -17,10 +17,15 @@ postsRouter.post(
   passport.authenticate("jwt", { session: false }),
   postsController.likePost
 );
-// postsRouter.get(
-//   "/:postId",
-//   passport.authenticate("jwt", { session: false }),
-//   postsController.getPost
-// );
+postsRouter.get(
+  "/:postId",
+  passport.authenticate("jwt", { session: false }),
+  postsController.getPost
+);
+postsRouter.post(
+  "/comments",
+  passport.authenticate("jwt", { session: false }),
+  postsController.postComment
+);
 
 module.exports = postsRouter;
