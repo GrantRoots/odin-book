@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import "../../index.css";
 
 function Profile() {
-  //show username first name/last bio all posts
-
-  //get params for userId
   const { userId } = useParams();
   const token = localStorage.getItem("token");
   const [profile, setProfile] = useState(null);
@@ -30,9 +28,34 @@ function Profile() {
   }, []);
 
   return (
-    <div>
-      <div>{profile.username}</div>
-    </div>
+    <main>
+      {profile && (
+        <div>
+          <h1>{profile.username}</h1>
+          <img
+            className="profilePic"
+            src={`/assets/${profile.profilePic}`}
+            alt="Profile Picture"
+          />
+          <div>
+            {profile.firstName} {profile.lastName}
+          </div>
+          <div>{profile.bio}</div>
+          {profile.posts.map((post) => {
+            return (
+              <div key={post.id}>
+                <div>{post.content}</div>
+                <div>{post.createdAt}</div>
+                <div>Likes: {post.likes}</div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+      <Link to={"/"}>
+        <button>Home</button>
+      </Link>
+    </main>
   );
 }
 

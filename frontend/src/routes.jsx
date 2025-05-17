@@ -5,6 +5,7 @@ import { Customize } from "./components/Customize/Customize";
 import { CreatePost } from "./components/CreatePost/CreatePost";
 import { FollowReqs } from "./components/FollowReqs/FollowReqs";
 import { Post } from "./components/Post/Post";
+import { Profile } from "./components/Profile/Profile";
 
 const routes = [
   {
@@ -34,6 +35,10 @@ const routes = [
   {
     path: "post/:postId",
     element: <Post />,
+  },
+  {
+    path: "/:userId",
+    element: <Profile />,
   },
 ];
 

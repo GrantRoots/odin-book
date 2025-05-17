@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./App.module.css";
 import { useEffect, useState } from "react";
+import "./index.css";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -128,14 +129,16 @@ function App() {
         <h1>Odinstagram</h1>
         {loggedIn && user && (
           <div>
-            <div>
-              <div>{user.username}</div>
-              <img
-                className={styles.profilePic}
-                src={`/assets/${user.profilePic}`}
-                alt="Profile Picture"
-              />
-            </div>
+            <Link to={`/${user.id}`}>
+              <div>
+                <div>{user.username}</div>
+                <img
+                  className="profilePic"
+                  src={`/assets/${user.profilePic}`}
+                  alt="Profile Picture"
+                />
+              </div>
+            </Link>
             <Link to={"customize"}>
               <button className={styles.button}>Customize Profile</button>
             </Link>
@@ -175,7 +178,9 @@ function App() {
                 posts.map((post) => {
                   return (
                     <div key={post.id}>
-                      <div>{post.username} "Link to user profile"</div>
+                      <Link to={`/${post.userId}`}>
+                        <div>{post.username}</div>
+                      </Link>
                       <div>{post.content}</div>
                       <div>Likes: {post.likes}</div>
                       <div>

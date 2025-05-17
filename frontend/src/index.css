@@ -2,3 +2,22 @@ html,
 body {
   margin: 0;
 }
+
+main {
+  background-color: rgb(63, 64, 67);
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+main > * {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profilePic {
+  height: 2rem;
+  border-radius: 4rem;
+}
