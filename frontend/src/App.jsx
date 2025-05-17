@@ -7,12 +7,32 @@ function App() {
   const [posts, setPosts] = useState([]);
   const [notFollowing, setNotFollowing] = useState([]);
   const [error, setError] = useState(null);
+  const [user, setUser] = useState(null);
   const username = localStorage.getItem("username");
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
 
+  async function getUser(userId) {
+    try {
+      const response = await fetch(`http://localhost:3000/user/${userId}`, {
+        mode: "cors",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) return;
+      const data = await response.json();
+      setUser(data.user);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   useEffect(() => {
-    if (token) setLoggedIn(true);
+    if (token) {
+      setLoggedIn(true);
+      getUser(userId);
+    }
   }, []);
 
   async function getUserAndFollowingPosts() {
@@ -106,9 +126,16 @@ function App() {
     <>
       <header className={styles.header}>
         <h1>Odinstagram</h1>
-        {loggedIn && (
+        {loggedIn && user && (
           <div>
-            <div>{username}</div>
+            <div>
+              <div>{user.username}</div>
+              <img
+                className={styles.profilePic}
+                src={`/assets/${user.profilePic}`}
+                alt="Profile Picture"
+              />
+            </div>
             <Link to={"customize"}>
               <button className={styles.button}>Customize Profile</button>
             </Link>

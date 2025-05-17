@@ -21,7 +21,7 @@ model User {
   password String
   firstName String @db.VarChar(255)
   lastName String @db.VarChar(255)
-  profilePic String?
+  profilePic String @default("default.jpg")
   bio String?
   followRequests String[]
   following String[]

@@ -2381,7 +2381,7 @@ export namespace Prisma {
     password: string
     firstName: string
     lastName: string
-    profilePic: string | null
+    profilePic: string
     bio: string | null
     followRequests: string[]
     following: string[]
@@ -2478,7 +2478,7 @@ export namespace Prisma {
       password: string
       firstName: string
       lastName: string
-      profilePic: string | null
+      profilePic: string
       bio: string | null
       followRequests: string[]
       following: string[]
@@ -5813,7 +5813,7 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     firstName?: StringFilter<"User"> | string
     lastName?: StringFilter<"User"> | string
-    profilePic?: StringNullableFilter<"User"> | string | null
+    profilePic?: StringFilter<"User"> | string
     bio?: StringNullableFilter<"User"> | string | null
     followRequests?: StringNullableListFilter<"User">
     following?: StringNullableListFilter<"User">
@@ -5827,7 +5827,7 @@ export namespace Prisma {
     password?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
-    profilePic?: SortOrderInput | SortOrder
+    profilePic?: SortOrder
     bio?: SortOrderInput | SortOrder
     followRequests?: SortOrder
     following?: SortOrder
@@ -5844,7 +5844,7 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     firstName?: StringFilter<"User"> | string
     lastName?: StringFilter<"User"> | string
-    profilePic?: StringNullableFilter<"User"> | string | null
+    profilePic?: StringFilter<"User"> | string
     bio?: StringNullableFilter<"User"> | string | null
     followRequests?: StringNullableListFilter<"User">
     following?: StringNullableListFilter<"User">
@@ -5858,7 +5858,7 @@ export namespace Prisma {
     password?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
-    profilePic?: SortOrderInput | SortOrder
+    profilePic?: SortOrder
     bio?: SortOrderInput | SortOrder
     followRequests?: SortOrder
     following?: SortOrder
@@ -5878,7 +5878,7 @@ export namespace Prisma {
     password?: StringWithAggregatesFilter<"User"> | string
     firstName?: StringWithAggregatesFilter<"User"> | string
     lastName?: StringWithAggregatesFilter<"User"> | string
-    profilePic?: StringNullableWithAggregatesFilter<"User"> | string | null
+    profilePic?: StringWithAggregatesFilter<"User"> | string
     bio?: StringNullableWithAggregatesFilter<"User"> | string | null
     followRequests?: StringNullableListFilter<"User">
     following?: StringNullableListFilter<"User">
@@ -6058,7 +6058,7 @@ export namespace Prisma {
     password: string
     firstName: string
     lastName: string
-    profilePic?: string | null
+    profilePic?: string
     bio?: string | null
     followRequests?: UserCreatefollowRequestsInput | string[]
     following?: UserCreatefollowingInput | string[]
@@ -6072,7 +6072,7 @@ export namespace Prisma {
     password: string
     firstName: string
     lastName: string
-    profilePic?: string | null
+    profilePic?: string
     bio?: string | null
     followRequests?: UserCreatefollowRequestsInput | string[]
     following?: UserCreatefollowingInput | string[]
@@ -6085,7 +6085,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
-    profilePic?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePic?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     followRequests?: UserUpdatefollowRequestsInput | string[]
     following?: UserUpdatefollowingInput | string[]
@@ -6099,7 +6099,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
-    profilePic?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePic?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     followRequests?: UserUpdatefollowRequestsInput | string[]
     following?: UserUpdatefollowingInput | string[]
@@ -6113,7 +6113,7 @@ export namespace Prisma {
     password: string
     firstName: string
     lastName: string
-    profilePic?: string | null
+    profilePic?: string
     bio?: string | null
     followRequests?: UserCreatefollowRequestsInput | string[]
     following?: UserCreatefollowingInput | string[]
@@ -6124,7 +6124,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
-    profilePic?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePic?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     followRequests?: UserUpdatefollowRequestsInput | string[]
     following?: UserUpdatefollowingInput | string[]
@@ -6136,7 +6136,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
-    profilePic?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePic?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     followRequests?: UserUpdatefollowRequestsInput | string[]
     following?: UserUpdatefollowingInput | string[]
@@ -6992,7 +6992,7 @@ export namespace Prisma {
     password: string
     firstName: string
     lastName: string
-    profilePic?: string | null
+    profilePic?: string
     bio?: string | null
     followRequests?: UserCreatefollowRequestsInput | string[]
     following?: UserCreatefollowingInput | string[]
@@ -7005,7 +7005,7 @@ export namespace Prisma {
     password: string
     firstName: string
     lastName: string
-    profilePic?: string | null
+    profilePic?: string
     bio?: string | null
     followRequests?: UserCreatefollowRequestsInput | string[]
     following?: UserCreatefollowingInput | string[]
@@ -7056,7 +7056,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
-    profilePic?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePic?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     followRequests?: UserUpdatefollowRequestsInput | string[]
     following?: UserUpdatefollowingInput | string[]
@@ -7069,7 +7069,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
-    profilePic?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePic?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     followRequests?: UserUpdatefollowRequestsInput | string[]
     following?: UserUpdatefollowingInput | string[]
@@ -7097,7 +7097,7 @@ export namespace Prisma {
     password: string
     firstName: string
     lastName: string
-    profilePic?: string | null
+    profilePic?: string
     bio?: string | null
     followRequests?: UserCreatefollowRequestsInput | string[]
     following?: UserCreatefollowingInput | string[]
@@ -7110,7 +7110,7 @@ export namespace Prisma {
     password: string
     firstName: string
     lastName: string
-    profilePic?: string | null
+    profilePic?: string
     bio?: string | null
     followRequests?: UserCreatefollowRequestsInput | string[]
     following?: UserCreatefollowingInput | string[]
@@ -7158,7 +7158,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
-    profilePic?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePic?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     followRequests?: UserUpdatefollowRequestsInput | string[]
     following?: UserUpdatefollowingInput | string[]
@@ -7171,7 +7171,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
-    profilePic?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePic?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     followRequests?: UserUpdatefollowRequestsInput | string[]
     following?: UserUpdatefollowingInput | string[]

@@ -16,14 +16,17 @@ async function signUp(username, hashedPassword, firstName, lastName, author) {
   }
 }
 
-async function updateProfile(newUsername, oldUsername) {
+async function updateProfile(id, username, firstName, lastName, bio) {
   try {
     await prisma.user.update({
       where: {
-        username: oldUsername,
+        id: parseInt(id),
       },
       data: {
-        username: newUsername,
+        username: username,
+        firstName: firstName,
+        lastName: lastName,
+        bio: bio,
       },
     });
   } catch (error) {
@@ -181,6 +184,21 @@ async function declineReq(username, userId) {
   }
 }
 
+async function getUser(id) {
+  try {
+    return await prisma.user.findUnique({
+      where: {
+        id: parseInt(id),
+      },
+      include: {
+        posts: true,
+      },
+    });
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   signUp,
   updateProfile,
@@ -189,4 +207,5 @@ module.exports = {
   getReqs,
   acceptReq,
   declineReq,
+  getUser,
 };

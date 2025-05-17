@@ -4,6 +4,11 @@ const passport = require("passport");
 
 userRouter.put("/", userController.updateProfile);
 userRouter.get(
+  "/:userId",
+  passport.authenticate("jwt", { session: false }),
+  userController.getUser
+);
+userRouter.get(
   "/",
   passport.authenticate("jwt", { session: false }),
   userController.getNotFollowing

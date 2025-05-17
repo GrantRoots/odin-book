@@ -3,7 +3,6 @@ const bcrypt = require("bcryptjs");
 const db = require("../queries/user");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
-const { user } = require("../prisma");
 
 const validateUser = [
   body("username").trim().notEmpty().escape(),
@@ -69,10 +68,15 @@ function logIn(req, res, next) {
   })(req, res, next);
 }
 
-const validateUsername = [body("newUsername").trim().notEmpty().escape()];
+const validateUpdate = [
+  body("username").trim().notEmpty(),
+  body("firstName").trim().notEmpty().isAlpha(),
+  body("lastName").trim().notEmpty().isAlpha(),
+  body("bio").trim().notEmpty(),
+];
 
 const updateProfile = [
-  validateUsername,
+  validateUpdate,
   async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -82,7 +86,13 @@ const updateProfile = [
         .json({ error: "Sign Up failed", details: errors.array() });
     }
     try {
-      await db.updateProfile(req.body.newUsername, req.body.oldUsername);
+      await db.updateProfile(
+        req.body.userId,
+        req.body.username,
+        req.body.firstName,
+        req.body.lastName,
+        req.body.bio
+      );
       return res.json({
         success: true,
         message: "Updated Profile",
@@ -165,6 +175,18 @@ async function declineReq(req, res, next) {
   }
 }
 
+async function getUser(req, res, next) {
+  try {
+    const user = await db.getUser(req.params.userId);
+    return res.json({
+      success: true,
+      user: user,
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   signUp,
   logIn,
@@ -174,4 +196,5 @@ module.exports = {
   getReqs,
   acceptReq,
   declineReq,
+  getUser,
 };
