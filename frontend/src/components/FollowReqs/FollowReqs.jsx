@@ -6,18 +6,16 @@ function FollowReqs() {
   const [error, setError] = useState(null);
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_API_URL;
 
   async function showReqs() {
     try {
-      const response = await fetch(
-        `http://localhost:3000/user/requests?id=${userId}`,
-        {
-          mode: "cors",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/user/requests?id=${userId}`, {
+        mode: "cors",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       if (!response.ok) return;
       const data = await response.json();
       if (!data.success) {
@@ -36,18 +34,15 @@ function FollowReqs() {
   async function acceptReq(username) {
     try {
       const data = { username: username, userId: userId };
-      const response = await fetch(
-        `http://localhost:3000/user/requests/accept`,
-        {
-          method: "POST",
-          mode: "cors",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/user/requests/accept`, {
+        method: "POST",
+        mode: "cors",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       if (!response.ok) return;
       showReqs();
     } catch (error) {
@@ -58,18 +53,15 @@ function FollowReqs() {
   async function declineReq(username) {
     try {
       const data = { username: username, userId: userId };
-      const response = await fetch(
-        `http://localhost:3000/user/requests/decline`,
-        {
-          method: "POST",
-          mode: "cors",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/user/requests/decline`, {
+        method: "POST",
+        mode: "cors",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       if (!response.ok) return;
       showReqs();
     } catch (error) {

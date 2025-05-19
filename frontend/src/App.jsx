@@ -9,7 +9,6 @@ function App() {
   const [notFollowing, setNotFollowing] = useState([]);
   const [error, setError] = useState(null);
   const [user, setUser] = useState(null);
-  const username = localStorage.getItem("username");
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
   const API_URL = import.meta.env.VITE_API_URL;
@@ -55,7 +54,7 @@ function App() {
 
   async function getNotFollowing() {
     try {
-      const response = await fetch(`http://localhost:3000/user?id=${userId}`, {
+      const response = await fetch(`${API_URL}/user?id=${userId}`, {
         mode: "cors",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -84,7 +83,7 @@ function App() {
         followId: followId,
       };
 
-      const response = await fetch("http://localhost:3000/user/follow", {
+      const response = await fetch(`${API_URL}/user/follow`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -109,7 +108,7 @@ function App() {
         postId: id,
       };
 
-      await fetch("http://localhost:3000/posts/like", {
+      await fetch(`${API_URL}/posts/like`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -135,7 +134,7 @@ function App() {
                 <div>{user.username}</div>
                 <img
                   className="profilePic"
-                  src={`http://localhost:3000/${user.profilePic}`}
+                  src={`${API_URL}/${user.profilePic}`}
                   alt="Profile Picture"
                 />
               </div>

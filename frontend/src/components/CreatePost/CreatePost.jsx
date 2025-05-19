@@ -6,6 +6,7 @@ function CreatePost() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
+  const API_URL = import.meta.env.VITE_API_URL;
 
   async function handleSend(e) {
     e.preventDefault();
@@ -15,7 +16,7 @@ function CreatePost() {
 
     const token = localStorage.getItem("token");
     try {
-      const response = await fetch("http://localhost:3000/posts", {
+      const response = await fetch(`${API_URL}/posts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

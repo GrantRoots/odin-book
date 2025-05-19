@@ -6,10 +6,11 @@ function Profile() {
   const { userId } = useParams();
   const token = localStorage.getItem("token");
   const [profile, setProfile] = useState(null);
+  const API_URL = import.meta.env.VITE_API_URL;
 
   async function getUser(userId) {
     try {
-      const response = await fetch(`http://localhost:3000/user/${userId}`, {
+      const response = await fetch(`${API_URL}/user/${userId}`, {
         mode: "cors",
         headers: {
           Authorization: `Bearer ${token}`,

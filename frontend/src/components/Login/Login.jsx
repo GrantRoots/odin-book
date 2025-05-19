@@ -6,6 +6,7 @@ import styles from "./Login.module.css";
 function Login() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const API_URL = import.meta.env.VITE_API_URL;
 
   async function handleLogin(e) {
     e.preventDefault();
@@ -14,7 +15,7 @@ function Login() {
     const data = Object.fromEntries(formData.entries());
 
     try {
-      const response = await fetch("http://localhost:3000/user/login", {
+      const response = await fetch(`${API_URL}/user/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

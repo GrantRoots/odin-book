@@ -6,10 +6,11 @@ function Post() {
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
   const { postId } = useParams();
+  const API_URL = import.meta.env.VITE_API_URL;
 
   async function getPost(postId) {
     try {
-      const response = await fetch(`http://localhost:3000/posts/${postId}`, {
+      const response = await fetch(`${API_URL}/posts/${postId}`, {
         mode: "cors",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -37,7 +38,7 @@ function Post() {
         postId: id,
       };
 
-      await fetch("http://localhost:3000/posts/like", {
+      await fetch(`${API_URL}/posts/like`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -61,7 +62,7 @@ function Post() {
       userId: userId,
     };
     try {
-      const response = await fetch("http://localhost:3000/posts/comments", {
+      const response = await fetch(`${API_URL}/posts/comments`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

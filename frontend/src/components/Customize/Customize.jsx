@@ -12,10 +12,11 @@ function Customize() {
   const [bio, setBio] = useState(null);
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
+  const API_URL = import.meta.env.VITE_API_URL;
 
   async function getUser(userId) {
     try {
-      const response = await fetch(`http://localhost:3000/user/${userId}`, {
+      const response = await fetch(`${API_URL}/user/${userId}`, {
         mode: "cors",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -43,7 +44,7 @@ function Customize() {
     const formData = new FormData(e.target);
 
     try {
-      const response = await fetch("http://localhost:3000/user", {
+      const response = await fetch(`${API_URL}/user`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -124,5 +125,3 @@ function Customize() {
 }
 
 export { Customize };
-
-//Profile photo??
