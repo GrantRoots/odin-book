@@ -47,6 +47,9 @@ function Profile() {
                 <div>{post.content}</div>
                 <div>{post.createdAt}</div>
                 <div>Likes: {post.likes}</div>
+                <Link to={`/post/${post.id}`}>
+                  <button>View Comments</button>
+                </Link>
               </div>
             );
           })}

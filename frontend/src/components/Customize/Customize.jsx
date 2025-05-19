@@ -13,8 +13,6 @@ function Customize() {
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
 
-  //FIX FOR PROFILE PIC
-
   async function getUser(userId) {
     try {
       const response = await fetch(`http://localhost:3000/user/${userId}`, {
@@ -26,7 +24,7 @@ function Customize() {
       if (!response.ok) return;
       const data = await response.json();
       setUsername(data.user.username);
-      // setProfilePic(data.user.profilePic);
+      setProfilePic(data.user.profilePic);
       setFirstName(data.user.firstName);
       setLastName(data.user.lastName);
       setBio(data.user.bio);
@@ -43,16 +41,14 @@ function Customize() {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
 
     try {
       const response = await fetch("http://localhost:3000/user", {
         method: "PUT",
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(data),
+        body: formData,
         mode: "cors",
       });
       const responseData = await response.json();
@@ -68,9 +64,10 @@ function Customize() {
   }
 
   return (
-    <>
+    <main>
+      {console.log(profilePic)}
       <h1>Update Profile</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} enctype="multipart/form-data">
         <label htmlFor="username">Username: </label>
         <input
           type="text"
@@ -101,16 +98,6 @@ function Customize() {
           }}
         />
 
-        {/* <label htmlFor="profilePic">Profile Picture: </label>
-        <input
-          type="file"
-          name="profilePic"
-          value={profilePic}
-          onChange={(e) => {
-            setProfilePic(e.target.value);
-          }}
-        /> */}
-
         <label htmlFor="bio">Bio: </label>
         <input
           type="text"
@@ -121,6 +108,9 @@ function Customize() {
           }}
         />
 
+        <label htmlFor="profilePic">Profile Picture: </label>
+        <input type="file" name="profilePic" />
+
         <input type="hidden" value={userId} name="userId" />
 
         <button type="Submit">Update</button>
@@ -129,7 +119,7 @@ function Customize() {
       <Link to={"/"}>
         <button>Home</button>
       </Link>
-    </>
+    </main>
   );
 }
 

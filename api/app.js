@@ -7,6 +7,7 @@ const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
 const { PrismaClient } = require("./generated/prisma");
 const prisma = require("./prisma");
 const cors = require("cors");
+const path = require("path");
 require("dotenv").config();
 
 const userRouter = require("./routes/user");
@@ -79,6 +80,7 @@ app.use(express.json());
 
 app.use("/user", userRouter);
 app.use("/posts", postsRouter);
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use((err, req, res, next) => {
   console.error(err);

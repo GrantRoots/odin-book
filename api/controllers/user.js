@@ -3,6 +3,8 @@ const bcrypt = require("bcryptjs");
 const db = require("../queries/user");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
 
 const validateUser = [
   body("username").trim().notEmpty().escape(),
@@ -76,6 +78,7 @@ const validateUpdate = [
 ];
 
 const updateProfile = [
+  upload.single("profilePic"),
   validateUpdate,
   async (req, res, next) => {
     const errors = validationResult(req);
@@ -86,12 +89,18 @@ const updateProfile = [
         .json({ error: "Sign Up failed", details: errors.array() });
     }
     try {
+      console.log(req.file);
+      // SAVE THE .path
+      //THEN WHEN TRYING TO SHOW USER THE `...url/${path}`
+      const user = db.getUser(req.body.userId);
+      profilePic = req.file ? req.file.path : user.profilePic;
       await db.updateProfile(
         req.body.userId,
         req.body.username,
         req.body.firstName,
         req.body.lastName,
-        req.body.bio
+        req.body.bio,
+        profilePic
       );
       return res.json({
         success: true,

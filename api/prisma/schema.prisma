@@ -31,6 +31,7 @@ model User {
 
 model Post{
   id Int @id @default(autoincrement())
+  image String?
   content String @db.VarChar(1000)
   createdAt DateTime @default(now())
   likes Int @default(0)

@@ -16,7 +16,14 @@ async function signUp(username, hashedPassword, firstName, lastName, author) {
   }
 }
 
-async function updateProfile(id, username, firstName, lastName, bio) {
+async function updateProfile(
+  id,
+  username,
+  firstName,
+  lastName,
+  bio,
+  profilePic
+) {
   try {
     await prisma.user.update({
       where: {
@@ -27,6 +34,7 @@ async function updateProfile(id, username, firstName, lastName, bio) {
         firstName: firstName,
         lastName: lastName,
         bio: bio,
+        profilePic: profilePic,
       },
     });
   } catch (error) {

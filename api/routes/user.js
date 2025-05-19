@@ -2,7 +2,11 @@ const userRouter = require("express").Router();
 const userController = require("../controllers/user");
 const passport = require("passport");
 
-userRouter.put("/", userController.updateProfile);
+userRouter.put(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  userController.updateProfile
+);
 userRouter.get(
   "/:userId",
   passport.authenticate("jwt", { session: false }),

@@ -12,10 +12,11 @@ function App() {
   const username = localStorage.getItem("username");
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_API_URL;
 
   async function getUser(userId) {
     try {
-      const response = await fetch(`http://localhost:3000/user/${userId}`, {
+      const response = await fetch(`${API_URL}/user/${userId}`, {
         mode: "cors",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -38,7 +39,7 @@ function App() {
 
   async function getUserAndFollowingPosts() {
     try {
-      const response = await fetch(`http://localhost:3000/posts?id=${userId}`, {
+      const response = await fetch(`${API_URL}/posts?id=${userId}`, {
         mode: "cors",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -134,7 +135,7 @@ function App() {
                 <div>{user.username}</div>
                 <img
                   className="profilePic"
-                  src={`/assets/${user.profilePic}`}
+                  src={`http://localhost:3000/${user.profilePic}`}
                   alt="Profile Picture"
                 />
               </div>
@@ -207,7 +208,9 @@ function App() {
             <div>
               <div>People To Follow</div>
               {error && <div>{error}</div>}
-              {notFollowing.length < 1 && <div>Nobody to follow :(</div>}
+              {notFollowing.length < 1 && (
+                <div>You're following everyone :)</div>
+              )}
               {notFollowing &&
                 notFollowing.map((user) => {
                   return (
