@@ -183,6 +183,7 @@ function App() {
                       </Link>
                       {post.image && (
                         <img
+                          className="postImg"
                           src={`${API_URL}/${post.image}`}
                           alt="Post Image"
                         />

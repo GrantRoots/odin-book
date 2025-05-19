@@ -66,7 +66,6 @@ function Customize() {
 
   return (
     <main>
-      {console.log(profilePic)}
       <h1>Update Profile</h1>
       <form onSubmit={handleSubmit} enctype="multipart/form-data">
         <label htmlFor="username">Username: </label>

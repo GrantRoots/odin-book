@@ -45,6 +45,13 @@ function Profile() {
           {profile.posts.map((post) => {
             return (
               <div key={post.id}>
+                {post.image && (
+                  <img
+                    className="postImg"
+                    src={`${API_URL}/${post.image}`}
+                    alt="Post Image"
+                  />
+                )}
                 <div>{post.content}</div>
                 <div>{post.createdAt}</div>
                 <div>Likes: {post.likes}</div>
