@@ -89,9 +89,6 @@ const updateProfile = [
         .json({ error: "Sign Up failed", details: errors.array() });
     }
     try {
-      console.log(req.file);
-      // SAVE THE .path
-      //THEN WHEN TRYING TO SHOW USER THE `...url/${path}`
       const user = db.getUser(req.body.userId);
       profilePic = req.file ? req.file.path : user.profilePic;
       await db.updateProfile(

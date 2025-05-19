@@ -35,7 +35,7 @@ function Profile() {
           <h1>{profile.username}</h1>
           <img
             className="profilePic"
-            src={`/assets/${profile.profilePic}`}
+            src={`${API_URL}/${profile.profilePic}`}
             alt="Profile Picture"
           />
           <div>

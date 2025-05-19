@@ -1,5 +1,7 @@
 const db = require("../queries/posts");
 const { body, validationResult } = require("express-validator");
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
 
 async function getUserAndFollowingPosts(req, res, next) {
   try {
@@ -18,6 +20,7 @@ const validatePost = [
 ];
 
 const createPost = [
+  upload.single("image"),
   validatePost,
   async (req, res, next) => {
     const errors = validationResult(req);
@@ -29,7 +32,8 @@ const createPost = [
       });
     }
     try {
-      await db.createPost(req.body.content, req.body.userId);
+      image = req.file ? req.file.path : null;
+      await db.createPost(req.body.content, req.body.userId, image);
       return res.json({
         success: true,
       });

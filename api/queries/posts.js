@@ -53,13 +53,14 @@ async function getUserAndFollowingPosts(id) {
   }
 }
 
-async function createPost(content, id) {
+async function createPost(content, id, image) {
   id = parseInt(id);
   try {
     await prisma.post.create({
       data: {
         content: content,
         userId: id,
+        image: image,
       },
     });
   } catch (error) {

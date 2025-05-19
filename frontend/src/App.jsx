@@ -181,6 +181,12 @@ function App() {
                       <Link to={`/${post.userId}`}>
                         <div>{post.username}</div>
                       </Link>
+                      {post.image && (
+                        <img
+                          src={`${API_URL}/${post.image}`}
+                          alt="Post Image"
+                        />
+                      )}
                       <div>{post.content}</div>
                       <div>Likes: {post.likes}</div>
                       <div>

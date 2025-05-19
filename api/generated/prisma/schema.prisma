@@ -21,7 +21,7 @@ model User {
   password       String
   firstName      String    @db.VarChar(255)
   lastName       String    @db.VarChar(255)
-  profilePic     String    @default("default.jpg")
+  profilePic     String    @default("uploads/default.jpg")
   bio            String?
   followRequests String[]
   following      String[]
@@ -31,6 +31,7 @@ model User {
 
 model Post {
   id        Int       @id @default(autoincrement())
+  image     String?
   content   String    @db.VarChar(1000)
   createdAt DateTime  @default(now())
   likes     Int       @default(0)
