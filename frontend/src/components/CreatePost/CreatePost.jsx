@@ -44,29 +44,29 @@ function CreatePost() {
     <>
       <Header></Header>
       <main>
-        <h1>Create A Post</h1>
+        <h2>Create A Post</h2>
         <form onSubmit={handleSend} enctype="multipart/form-data">
           <label htmlFor="contnet">
-            <h2>Content:</h2>
+            <span>Content:</span>
           </label>
           <textarea type="text" name="content" className={styles.content} />
 
           <label htmlFor="image">
-            <h2>Image(Optional): </h2>
+            <span>Image(Optional): </span>
           </label>
           <input type="file" name="image" />
 
           <input type="hidden" value={userId} name="userId" />
 
           <button type="submit" className={styles.submit}>
-            <h2>Submit</h2>
+            <span>Submit</span>
           </button>
         </form>
         {error && <div>{error}</div>}
         <Link to={"/"}>
-          <button className={styles.home}>
+          <span className={styles.home}>
             <Home></Home>
-          </button>
+          </span>
         </Link>
       </main>
     </>

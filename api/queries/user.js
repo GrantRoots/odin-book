@@ -153,7 +153,7 @@ async function acceptReq(username, userId) {
       },
     });
     const removedUsername = user.followRequests.filter((id) => {
-      id !== reqUser.id;
+      return parseInt(id) !== reqUser.id;
     });
     await prisma.user.update({
       where: {

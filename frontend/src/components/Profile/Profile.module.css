@@ -2,6 +2,22 @@
   color: white;
 }
 
+.main h2 {
+  font-size: 2rem;
+  margin: 1rem;
+}
+
+.main span {
+  font-size: 1.2rem;
+}
+
+.profilePic {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 4rem;
+  margin-bottom: 1rem;
+}
+
 .post {
   background-color: white;
   margin: 2rem;
@@ -21,6 +37,10 @@
   margin: 0.3rem;
   overflow-wrap: break-word;
   max-width: 80%;
+}
+
+.post p {
+  font-size: 2rem;
 }
 
 .post button {

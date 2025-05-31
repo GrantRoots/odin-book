@@ -40,39 +40,39 @@ function Signup() {
         <h1>Sign Up</h1>
         <form onSubmit={onSubmit} className={styles.form}>
           <label htmlFor="username">
-            <h2>Username: </h2>
+            <span>Username: </span>
           </label>
           <input type="text" name="username" required />
 
           <label htmlFor="password">
-            <h2>Password: </h2>
+            <span>Password: </span>
           </label>
           <input type="password" name="password" required />
 
           <label htmlFor="confirmPassword">
-            <h2>Confirm Password: </h2>
+            <span>Confirm Password: </span>
           </label>
           <input type="password" name="confirmPassword" required />
 
           <label htmlFor="firstName">
-            <h2>First Name: </h2>
+            <span>First Name: </span>
           </label>
           <input type="text" name="firstName" required />
 
           <label htmlFor="lastName">
-            <h2>Last Name: </h2>
+            <span>Last Name: </span>
           </label>
           <input type="text" name="lastName" required />
 
           <button type="submit" className={styles.submit}>
-            <h2>Submit</h2>
+            Submit
           </button>
         </form>
         {error && <div>{error}</div>}
         <Link to={"/"}>
-          <button className={styles.home}>
+          <span className={styles.home}>
             <Home></Home>
-          </button>
+          </span>
         </Link>
       </main>
     </>

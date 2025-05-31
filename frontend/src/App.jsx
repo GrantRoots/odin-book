@@ -134,9 +134,9 @@ function App() {
           <div>
             <Link to={`/${user.id}`} className="link">
               <div className={styles.user}>
-                <div>{user.username}</div>
+                <span>{user.username}</span>
                 <img
-                  className="profilePic"
+                  className={styles.profilePic}
                   src={`${API_URL}/${user.profilePic}`}
                   alt="Profile Picture"
                 />
@@ -165,19 +165,19 @@ function App() {
                 <button className={styles.button}>Log In</button>
               </Link>
             </div>
-            <h1 style={{ color: "white" }}>Welcome To Odinstagram!</h1>
-            <h2 style={{ color: "white" }}>Sign Up To Get Started</h2>
+            <h2 style={{ color: "white" }}>Welcome To Odinstagram!</h2>
+            <h3 style={{ color: "white" }}>Sign Up To Get Started</h3>
           </div>
         )}
 
         {loggedIn && (
-          <div className={styles.loggedInContainer}>
+          <div className={styles.container}>
             <div>
-              <h1>
+              <h2>
                 <u style={{ color: "white" }}>Your Feed</u>
-              </h1>
+              </h2>
               {posts.length < 1 && (
-                <h2>No posts yet create one or follow some people :)</h2>
+                <span>No posts yet create one or follow some people :)</span>
               )}
               {posts &&
                 posts.map((post) => {
@@ -185,13 +185,13 @@ function App() {
                     <div key={post.id} className={styles.post}>
                       <Link to={`/${post.userId}`} className="link">
                         <img
-                          className="profilePic"
+                          className={styles.postProfilePic}
                           src={`${API_URL}/${post.profilePic}`}
                           alt="Profile Picture"
                         />
-                        <h1>
+                        <div className={styles.username}>
                           <u>{post.username}</u>
-                        </h1>
+                        </div>
                       </Link>
                       {post.image && (
                         <img
@@ -199,7 +199,7 @@ function App() {
                           alt="Post Image"
                         />
                       )}
-                      <h2>{post.content}</h2>
+                      <p>{post.content}</p>
                       <div className={styles.postIcons}>
                         <button
                           onClick={() => {
@@ -218,7 +218,9 @@ function App() {
                       </div>
                       <Link to={`post/${post.id}`}>
                         <button>
-                          <h3>View Post / Comments</h3>
+                          <span>
+                            <b>View Post / Comments</b>
+                          </span>
                         </button>
                       </Link>
                       <div>
@@ -235,14 +237,22 @@ function App() {
                 })}
             </div>
             <div className={styles.peopleToFollow}>
-              <h1>People To Follow</h1>
-              {error && <h3 style={{ color: "rgb(170, 19, 19)" }}>{error}</h3>}
-              {notFollowing.length < 1 && <h2>You're following everyone :)</h2>}
+              <h2>
+                <u>People To Follow</u>
+              </h2>
+              {error && (
+                <span style={{ color: "rgb(170, 19, 19)" }}>{error}</span>
+              )}
+              {notFollowing.length < 1 && (
+                <span>You're following everyone :)</span>
+              )}
               {notFollowing &&
                 notFollowing.map((user) => {
                   return (
                     <div key={user.id}>
-                      <h2>{user.username}</h2>
+                      <div>
+                        <span>{user.username}</span>
+                      </div>
                       <button
                         onClick={() => {
                           sendFollowReq(user.id);

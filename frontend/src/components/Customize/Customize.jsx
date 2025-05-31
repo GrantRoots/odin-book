@@ -71,10 +71,10 @@ function Customize() {
     <>
       <Header></Header>
       <main className={styles.main}>
-        <h1>Update Profile</h1>
+        <h2>Customize Profile</h2>
         <form onSubmit={handleSubmit} enctype="multipart/form-data">
           <label htmlFor="username">
-            <h2>Username: </h2>
+            <span>Username: </span>
           </label>
           <input
             type="text"
@@ -86,7 +86,7 @@ function Customize() {
           />
 
           <label htmlFor="firstName">
-            <h2>First Name: </h2>
+            <span>First Name: </span>
           </label>
           <input
             type="text"
@@ -98,7 +98,7 @@ function Customize() {
           />
 
           <label htmlFor="lastName">
-            <h2>Last Name: </h2>
+            <span>Last Name: </span>
           </label>
           <input
             type="text"
@@ -110,7 +110,7 @@ function Customize() {
           />
 
           <label htmlFor="bio">
-            <h2>Bio: </h2>
+            <span>Bio: </span>
           </label>
           <textarea
             type="text"
@@ -123,21 +123,21 @@ function Customize() {
           />
 
           <label htmlFor="profilePic">
-            <h2>Profile Picture: </h2>
+            <span>Profile Picture: </span>
           </label>
           <input type="file" name="profilePic" />
 
           <input type="hidden" value={userId} name="userId" />
 
           <button type="Submit" className={styles.update}>
-            <h3>Update</h3>
+            Update
           </button>
         </form>
         {error && <div>{error}</div>}
         <Link to={"/"}>
-          <button className={styles.home}>
+          <span className={styles.home}>
             <Home></Home>
-          </button>
+          </span>
         </Link>
       </main>
     </>

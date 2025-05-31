@@ -51,6 +51,7 @@ function FollowReqs() {
     } catch (error) {
       console.error(error);
     }
+    // this is removing all the follow requests
   }
 
   async function declineReq(username) {
@@ -75,35 +76,43 @@ function FollowReqs() {
   return (
     <>
       <Header></Header>
-      <main style={{ color: "white" }}>
-        <h1>Follow Requests</h1>
-        {reqs.length < 1 && <h2>No reqeusts</h2>}
+      <main className={styles.container}>
+        <h2>Follow Requests</h2>
+        {reqs.length < 1 && (
+          <div>
+            <span>No reqeusts</span>
+          </div>
+        )}
         {reqs &&
           reqs.map((req) => {
             return (
-              <div key={req}>
+              <div key={req} className={styles.req}>
                 <div>{req}</div>
-                <button
-                  onClick={() => {
-                    acceptReq(req);
-                  }}
-                >
-                  Accept
-                </button>
-                <button
-                  onClick={() => {
-                    declineReq(req);
-                  }}
-                >
-                  Decline
-                </button>
+                <div>
+                  <button
+                    onClick={() => {
+                      acceptReq(req);
+                    }}
+                    className={styles.accept}
+                  >
+                    Accept
+                  </button>
+                  <button
+                    onClick={() => {
+                      declineReq(req);
+                    }}
+                    className={styles.decline}
+                  >
+                    Decline
+                  </button>
+                </div>
               </div>
             );
           })}
         <Link to={"/"}>
-          <button className={styles.home}>
+          <span className={styles.home}>
             <Home></Home>
-          </button>
+          </span>
         </Link>
       </main>
     </>

@@ -92,13 +92,17 @@ function Post() {
     <>
       <Header></Header>
       <main>
-        {error && <div>{error}</div>}
+        {error && (
+          <div>
+            <span>{error}</span>
+          </div>
+        )}
         {post && (
           <div key={post.id} className={styles.post}>
             <Link to={`/${post.userId}`} className="link">
-              <h1>
+              <span>
                 <u>{post.username}</u>
-              </h1>
+              </span>
             </Link>
             {post.image && (
               <img
@@ -107,9 +111,11 @@ function Post() {
                 alt="Post Image"
               />
             )}
-            <h2>{post.content}</h2>
+            <p>{post.content}</p>
             <div>
-              <div>Likes: {post.likes}</div>
+              <div>
+                <span>Likes: {post.likes}</span>
+              </div>
               <button
                 onClick={() => {
                   likePost(post.id);
@@ -128,7 +134,9 @@ function Post() {
             <form onSubmit={postComment}>
               <label htmlFor="comment">Comment: </label>
               <input type="text" name="comment" />
-              <button type="submit">Send</button>
+              <button type="submit">
+                <span className={styles.send}>Send</span>
+              </button>
             </form>
             <div>
               <h2>Comments</h2>
@@ -143,9 +151,9 @@ function Post() {
                 .reverse()}
             </div>
             <Link to={"/"}>
-              <button>
+              <span>
                 <Home></Home>
-              </button>
+              </span>
             </Link>
           </div>
         )}

@@ -3,6 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
+  min-height: 4rem;
 }
 
 .header > * {
@@ -23,7 +24,7 @@
   font-size: 1.1rem;
 }
 
-.loggedInContainer {
+.container {
   display: grid;
   grid-template-columns: 70% 20%;
   justify-content: space-around;
@@ -33,8 +34,20 @@
   text-align: center;
 }
 
-.loggedInContainer h1 {
-  text-align: center;
+.container h2 {
+  font-size: 2.2rem;
+}
+
+.username {
+  font-size: 1.8rem;
+}
+
+.container p {
+  font-size: 2rem;
+}
+
+.container span {
+  font-size: 1rem;
 }
 
 .post {
@@ -67,6 +80,18 @@
   cursor: pointer;
 }
 
+.profilePic {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 4rem;
+}
+
+.postProfilePic {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 4rem;
+}
+
 .postIcons {
   display: flex;
 }
@@ -84,10 +109,15 @@
   width: 100%;
 }
 
-.peopleToFollow h2 {
+.peopleToFollow > div {
+  margin: 0.5rem;
+}
+
+.peopleToFollow span {
   overflow-wrap: break-word;
   width: 100%;
   text-align: center;
+  font-size: 1.5rem;
 }
 
 .follow {

@@ -37,18 +37,20 @@ function Profile() {
       <main className={styles.main}>
         {profile && (
           <>
-            <h1>{profile.username}</h1>
+            <h2>{profile.username}'s Profile</h2>
             <img
-              className="profilePic"
+              className={styles.profilePic}
               src={`${API_URL}/${profile.profilePic}`}
               alt="Profile Picture"
             />
-            <h2>
+            <span>
               {profile.firstName} {profile.lastName}
+            </span>
+            <p>{profile.bio}</p>
+            <h2>
+              <u>Posts</u>
             </h2>
-            <h4>{profile.bio}</h4>
-            <h1>Posts</h1>
-            {profile.posts.length < 1 && <h2>No Posts Yet. Create One!</h2>}
+            {profile.posts.length < 1 && <div>No Posts Yet. Create One!</div>}
             {profile.posts.map((post) => {
               return (
                 <div key={post.id} className={styles.post}>
@@ -59,7 +61,7 @@ function Profile() {
                       alt="Post Image"
                     />
                   )}
-                  <h1>{post.content}</h1>
+                  <p>{post.content}</p>
                   <div>
                     {new Date(post.createdAt).toLocaleTimeString([], {
                       year: "numeric",
@@ -72,7 +74,7 @@ function Profile() {
                   <div>Likes: {post.likes}</div>
                   <Link to={`/post/${post.id}`}>
                     <button>
-                      <h3>View Post / Comments</h3>
+                      <span>View Post / Comments</span>
                     </button>
                   </Link>
                 </div>
@@ -81,9 +83,9 @@ function Profile() {
           </>
         )}
         <Link to={"/"}>
-          <button className={styles.home}>
+          <span className={styles.home}>
             <Home></Home>
-          </button>
+          </span>
         </Link>
       </main>
     </>

@@ -18,12 +18,6 @@ main > * {
   align-items: center;
 }
 
-.profilePic {
-  height: 2rem;
-  width: 2rem;
-  border-radius: 4rem;
-}
-
 .link {
   text-decoration: none;
   color: inherit;

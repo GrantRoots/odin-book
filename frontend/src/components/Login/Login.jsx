@@ -44,24 +44,28 @@ function Login() {
       <h1>Login</h1>
       <form onSubmit={handleLogin}>
         <label htmlFor="username">
-          <h2>Username: </h2>
+          <span>Username: </span>
         </label>
         <input type="text" name="username" />
 
         <label htmlFor="password">
-          <h2>Password: </h2>
+          <span>Password: </span>
         </label>
         <input type="password" name="password" />
 
         <button type="submit" className={styles.submit}>
-          <h2>Submit</h2>
+          Submit
         </button>
       </form>
-      {error && <div>{error}</div>}
+      {error && (
+        <div>
+          <span>{error}</span>
+        </div>
+      )}
       <Link to={"/"}>
-        <button className={styles.home}>
+        <span className={styles.home}>
           <Home></Home>
-        </button>
+        </span>
       </Link>
     </main>
   );
