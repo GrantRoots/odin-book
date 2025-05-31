@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "./Signup.module.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { Home } from "../Icons/Icons";
 
 function Signup() {
   const [error, setError] = useState(null);
@@ -34,31 +35,47 @@ function Signup() {
   }
 
   return (
-    <div className={styles.container}>
-      <h1>Sign Up</h1>
-      <form onSubmit={onSubmit} className={styles.form}>
-        <label htmlFor="username">Username: </label>
-        <input type="text" name="username" required />
+    <>
+      <main className={styles.container}>
+        <h1>Sign Up</h1>
+        <form onSubmit={onSubmit} className={styles.form}>
+          <label htmlFor="username">
+            <h2>Username: </h2>
+          </label>
+          <input type="text" name="username" required />
 
-        <label htmlFor="password">Password: </label>
-        <input type="text" name="password" required />
+          <label htmlFor="password">
+            <h2>Password: </h2>
+          </label>
+          <input type="password" name="password" required />
 
-        <label htmlFor="confirmPassword">Confirm Password: </label>
-        <input type="text" name="confirmPassword" required />
+          <label htmlFor="confirmPassword">
+            <h2>Confirm Password: </h2>
+          </label>
+          <input type="password" name="confirmPassword" required />
 
-        <label htmlFor="firstName">First Name: </label>
-        <input type="text" name="firstName" required />
+          <label htmlFor="firstName">
+            <h2>First Name: </h2>
+          </label>
+          <input type="text" name="firstName" required />
 
-        <label htmlFor="lastName">Last Name: </label>
-        <input type="text" name="lastName" required />
+          <label htmlFor="lastName">
+            <h2>Last Name: </h2>
+          </label>
+          <input type="text" name="lastName" required />
 
-        <button type="submit">Submit</button>
-      </form>
-      {error && <div>{error}</div>}
-      <Link to={"/"}>
-        <button>Home</button>
-      </Link>
-    </div>
+          <button type="submit" className={styles.submit}>
+            <h2>Submit</h2>
+          </button>
+        </form>
+        {error && <div>{error}</div>}
+        <Link to={"/"}>
+          <button className={styles.home}>
+            <Home></Home>
+          </button>
+        </Link>
+      </main>
+    </>
   );
 }
 

@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import styles from "./Post.module.css";
+import { Home, Like } from "../Icons/Icons";
+import { Header } from "../Header/Header";
+
 function Post() {
   const [post, setPost] = useState(null);
   const [error, setError] = useState(null);
@@ -85,46 +89,68 @@ function Post() {
   }
 
   return (
-    <div>
-      {error && <div>{error}</div>}
-      {post && (
-        <div key={post.id}>
-          <div>{post.username} "Link to user profile"</div>
-          <div>{post.content}</div>
-          <div>Likes: {post.likes}</div>
-          <div>
-            {new Date(post.createdAt).toLocaleTimeString([], {
-              hour: "2-digit",
-              minute: "2-digit",
-            })}
+    <>
+      <Header></Header>
+      <main>
+        {error && <div>{error}</div>}
+        {post && (
+          <div key={post.id} className={styles.post}>
+            <Link to={`/${post.userId}`} className="link">
+              <h1>
+                <u>{post.username}</u>
+              </h1>
+            </Link>
+            {post.image && (
+              <img
+                className="postImg"
+                src={`${API_URL}/${post.image}`}
+                alt="Post Image"
+              />
+            )}
+            <h2>{post.content}</h2>
+            <div>
+              <div>Likes: {post.likes}</div>
+              <button
+                onClick={() => {
+                  likePost(post.id);
+                }}
+              >
+                <Like></Like>
+              </button>
+            </div>
+            <div>
+              {new Date(post.createdAt).toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </div>
+
+            <form onSubmit={postComment}>
+              <label htmlFor="comment">Comment: </label>
+              <input type="text" name="comment" />
+              <button type="submit">Send</button>
+            </form>
+            <div>
+              <h2>Comments</h2>
+              {post.comments
+                .map((comment) => {
+                  return (
+                    <div key={comment.id} className={styles.comment}>
+                      {comment.username}: {comment.text}
+                    </div>
+                  );
+                })
+                .reverse()}
+            </div>
+            <Link to={"/"}>
+              <button>
+                <Home></Home>
+              </button>
+            </Link>
           </div>
-          <button
-            onClick={() => {
-              likePost(post.id);
-            }}
-          >
-            Like
-          </button>
-          <form onSubmit={postComment}>
-            <label htmlFor="comment">Comment: </label>
-            <input type="text" name="comment" />
-            <button type="submit">Send</button>
-          </form>
-          <div>
-            {post.comments.map((comment) => {
-              return (
-                <div key={comment.id}>
-                  {comment.username}: {comment.text}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
-      <Link to={"/"}>
-        <button>Home</button>
-      </Link>
-    </div>
+        )}
+      </main>
+    </>
   );
 }
 

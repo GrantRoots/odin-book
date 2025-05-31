@@ -17,7 +17,7 @@ async function getUserAndFollowingPosts(id) {
       },
     });
     const userPostsWithUsername = user.posts.map((post) => {
-      return { ...post, username: user.username };
+      return { ...post, username: user.username, profilePic: user.profilePic };
     });
 
     //find following posts
@@ -36,7 +36,11 @@ async function getUserAndFollowingPosts(id) {
           },
         });
         const followingPostsWithUsername = followData.posts.map((post) => {
-          return { ...post, username: followData.username };
+          return {
+            ...post,
+            username: followData.username,
+            profilePic: followData.profilePic,
+          };
         });
         return followingPostsWithUsername;
       })

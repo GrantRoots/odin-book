@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.css";
+import { Home } from "../Icons/Icons";
 
 function Login() {
   const [error, setError] = useState(null);
@@ -39,20 +40,30 @@ function Login() {
   }
 
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
       <h1>Login</h1>
       <form onSubmit={handleLogin}>
-        <label htmlFor="username">Username: </label>
+        <label htmlFor="username">
+          <h2>Username: </h2>
+        </label>
         <input type="text" name="username" />
-        <label htmlFor="password">Password: </label>
-        <input type="text" name="password" />
-        <button type="submit">Submit</button>
+
+        <label htmlFor="password">
+          <h2>Password: </h2>
+        </label>
+        <input type="password" name="password" />
+
+        <button type="submit" className={styles.submit}>
+          <h2>Submit</h2>
+        </button>
       </form>
       {error && <div>{error}</div>}
       <Link to={"/"}>
-        <button>Home</button>
+        <button className={styles.home}>
+          <Home></Home>
+        </button>
       </Link>
-    </div>
+    </main>
   );
 }
 

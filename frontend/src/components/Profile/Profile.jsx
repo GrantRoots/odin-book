@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import "../../index.css";
+import styles from "./Profile.module.css";
+import { Header } from "../Header/Header";
+import { Home } from "../Icons/Icons";
 
 function Profile() {
   const { userId } = useParams();
@@ -29,44 +32,61 @@ function Profile() {
   }, []);
 
   return (
-    <main>
-      {profile && (
-        <div>
-          <h1>{profile.username}</h1>
-          <img
-            className="profilePic"
-            src={`${API_URL}/${profile.profilePic}`}
-            alt="Profile Picture"
-          />
-          <div>
-            {profile.firstName} {profile.lastName}
-          </div>
-          <div>{profile.bio}</div>
-          {profile.posts.map((post) => {
-            return (
-              <div key={post.id}>
-                {post.image && (
-                  <img
-                    className="postImg"
-                    src={`${API_URL}/${post.image}`}
-                    alt="Post Image"
-                  />
-                )}
-                <div>{post.content}</div>
-                <div>{post.createdAt}</div>
-                <div>Likes: {post.likes}</div>
-                <Link to={`/post/${post.id}`}>
-                  <button>View Comments</button>
-                </Link>
-              </div>
-            );
-          })}
-        </div>
-      )}
-      <Link to={"/"}>
-        <button>Home</button>
-      </Link>
-    </main>
+    <>
+      <Header></Header>
+      <main className={styles.main}>
+        {profile && (
+          <>
+            <h1>{profile.username}</h1>
+            <img
+              className="profilePic"
+              src={`${API_URL}/${profile.profilePic}`}
+              alt="Profile Picture"
+            />
+            <h2>
+              {profile.firstName} {profile.lastName}
+            </h2>
+            <h4>{profile.bio}</h4>
+            <h1>Posts</h1>
+            {profile.posts.length < 1 && <h2>No Posts Yet. Create One!</h2>}
+            {profile.posts.map((post) => {
+              return (
+                <div key={post.id} className={styles.post}>
+                  {post.image && (
+                    <img
+                      className="postImg"
+                      src={`${API_URL}/${post.image}`}
+                      alt="Post Image"
+                    />
+                  )}
+                  <h1>{post.content}</h1>
+                  <div>
+                    {new Date(post.createdAt).toLocaleTimeString([], {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </div>
+                  <div>Likes: {post.likes}</div>
+                  <Link to={`/post/${post.id}`}>
+                    <button>
+                      <h3>View Post / Comments</h3>
+                    </button>
+                  </Link>
+                </div>
+              );
+            })}
+          </>
+        )}
+        <Link to={"/"}>
+          <button className={styles.home}>
+            <Home></Home>
+          </button>
+        </Link>
+      </main>
+    </>
   );
 }
 

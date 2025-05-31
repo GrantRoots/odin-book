@@ -9,6 +9,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: white;
 }
 
 main > * {
@@ -19,9 +20,11 @@ main > * {
 
 .profilePic {
   height: 2rem;
+  width: 2rem;
   border-radius: 4rem;
 }
 
-.postImg {
-  height: 12rem;
+.link {
+  text-decoration: none;
+  color: inherit;
 }

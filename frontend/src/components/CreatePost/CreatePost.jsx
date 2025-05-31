@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { Header } from "../Header/Header";
+import { Home } from "../Icons/Icons";
+import styles from "./CreatePost.module.css";
 
 function CreatePost() {
   const [error, setError] = useState(null);
@@ -38,24 +41,35 @@ function CreatePost() {
   }
 
   return (
-    <main>
-      <h1>Create A Post</h1>
-      <form onSubmit={handleSend} enctype="multipart/form-data">
-        <label htmlFor="contnet">Content:</label>
-        <input type="text" name="content" />
+    <>
+      <Header></Header>
+      <main>
+        <h1>Create A Post</h1>
+        <form onSubmit={handleSend} enctype="multipart/form-data">
+          <label htmlFor="contnet">
+            <h2>Content:</h2>
+          </label>
+          <textarea type="text" name="content" className={styles.content} />
 
-        <label htmlFor="image">Image(Optional): </label>
-        <input type="file" name="image" />
+          <label htmlFor="image">
+            <h2>Image(Optional): </h2>
+          </label>
+          <input type="file" name="image" />
 
-        <input type="hidden" value={userId} name="userId" />
+          <input type="hidden" value={userId} name="userId" />
 
-        <button type="submit">Submit</button>
-      </form>
-      {error && <div>{error}</div>}
-      <Link to={"/"}>
-        <button>Home</button>
-      </Link>
-    </main>
+          <button type="submit" className={styles.submit}>
+            <h2>Submit</h2>
+          </button>
+        </form>
+        {error && <div>{error}</div>}
+        <Link to={"/"}>
+          <button className={styles.home}>
+            <Home></Home>
+          </button>
+        </Link>
+      </main>
+    </>
   );
 }
 

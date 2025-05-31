@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "./App.module.css";
 import { useEffect, useState } from "react";
 import "./index.css";
+import { Home, Like, Comment } from "./components/Icons/Icons";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -126,11 +127,13 @@ function App() {
   return (
     <>
       <header className={styles.header}>
-        <h1>Odinstagram</h1>
+        <Link to={"/"} className="link">
+          <h1>Odinstagram</h1>
+        </Link>
         {loggedIn && user && (
           <div>
-            <Link to={`/${user.id}`}>
-              <div>
+            <Link to={`/${user.id}`} className="link">
+              <div className={styles.user}>
                 <div>{user.username}</div>
                 <img
                   className="profilePic"
@@ -144,6 +147,9 @@ function App() {
             </Link>
             <Link to={"requests"}>
               <button className={styles.button}>Follow Requests</button>
+            </Link>
+            <Link to={"create"}>
+              <button className={styles.button}>Create Post</button>
             </Link>
           </div>
         )}
@@ -159,73 +165,89 @@ function App() {
                 <button className={styles.button}>Log In</button>
               </Link>
             </div>
-            <h1>Welcome To Odinstagram!</h1>
-            <h2>Sign Up To Get Started</h2>
+            <h1 style={{ color: "white" }}>Welcome To Odinstagram!</h1>
+            <h2 style={{ color: "white" }}>Sign Up To Get Started</h2>
           </div>
         )}
 
         {loggedIn && (
           <div className={styles.loggedInContainer}>
             <div>
-              <Link to={"create"}>
-                <button>Create Post</button>
-              </Link>
-              <h1>Your Feed</h1>
+              <h1>
+                <u style={{ color: "white" }}>Your Feed</u>
+              </h1>
               {posts.length < 1 && (
-                <div>No posts yet create one or follow some people :)</div>
+                <h2>No posts yet create one or follow some people :)</h2>
               )}
               {posts &&
                 posts.map((post) => {
                   return (
-                    <div key={post.id}>
-                      <Link to={`/${post.userId}`}>
-                        <div>{post.username}</div>
+                    <div key={post.id} className={styles.post}>
+                      <Link to={`/${post.userId}`} className="link">
+                        <img
+                          className="profilePic"
+                          src={`${API_URL}/${post.profilePic}`}
+                          alt="Profile Picture"
+                        />
+                        <h1>
+                          <u>{post.username}</u>
+                        </h1>
                       </Link>
                       {post.image && (
                         <img
-                          className="postImg"
                           src={`${API_URL}/${post.image}`}
                           alt="Post Image"
                         />
                       )}
-                      <div>{post.content}</div>
-                      <div>Likes: {post.likes}</div>
+                      <h2>{post.content}</h2>
+                      <div className={styles.postIcons}>
+                        <button
+                          onClick={() => {
+                            likePost(post.id);
+                          }}
+                          className={styles.likes}
+                        >
+                          <Like></Like>
+                          {post.likes}
+                        </button>
+                        <Link to={`post/${post.id}`}>
+                          <button>
+                            <Comment></Comment>
+                          </button>
+                        </Link>
+                      </div>
+                      <Link to={`post/${post.id}`}>
+                        <button>
+                          <h3>View Post / Comments</h3>
+                        </button>
+                      </Link>
                       <div>
                         {new Date(post.createdAt).toLocaleTimeString([], {
+                          year: "numeric",
+                          month: "2-digit",
+                          day: "2-digit",
                           hour: "2-digit",
                           minute: "2-digit",
                         })}
                       </div>
-                      <button
-                        onClick={() => {
-                          likePost(post.id);
-                        }}
-                      >
-                        Like
-                      </button>
-                      <Link to={`post/${post.id}`}>
-                        <button>View Comments</button>
-                        <button>Comment</button>
-                      </Link>
                     </div>
                   );
                 })}
             </div>
-            <div>
-              <div>People To Follow</div>
-              {error && <div>{error}</div>}
-              {notFollowing.length < 1 && (
-                <div>You're following everyone :)</div>
-              )}
+            <div className={styles.peopleToFollow}>
+              <h1>People To Follow</h1>
+              {error && <h3 style={{ color: "rgb(170, 19, 19)" }}>{error}</h3>}
+              {notFollowing.length < 1 && <h2>You're following everyone :)</h2>}
               {notFollowing &&
                 notFollowing.map((user) => {
                   return (
                     <div key={user.id}>
-                      <div>{user.username}</div>
+                      <h2>{user.username}</h2>
                       <button
                         onClick={() => {
                           sendFollowReq(user.id);
                         }}
+                        className={styles.follow}
                       >
                         Follow
                       </button>

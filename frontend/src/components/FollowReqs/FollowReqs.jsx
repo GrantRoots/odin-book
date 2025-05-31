@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Home } from "../Icons/Icons";
+import { Header } from "../Header/Header";
+import styles from "./FollowReqs.module.css";
 
 function FollowReqs() {
   const [reqs, setReqs] = useState([]);
@@ -70,35 +73,40 @@ function FollowReqs() {
   }
 
   return (
-    <div>
-      <h1>Follow Requests</h1>
-      {reqs.length < 1 && <div>No reqeusts</div>}
-      {reqs &&
-        reqs.map((req) => {
-          return (
-            <div key={req}>
-              <div>{req}</div>
-              <button
-                onClick={() => {
-                  acceptReq(req);
-                }}
-              >
-                Accept
-              </button>
-              <button
-                onClick={() => {
-                  declineReq(req);
-                }}
-              >
-                Decline
-              </button>
-            </div>
-          );
-        })}
-      <Link to={"/"}>
-        <button>Home</button>
-      </Link>
-    </div>
+    <>
+      <Header></Header>
+      <main style={{ color: "white" }}>
+        <h1>Follow Requests</h1>
+        {reqs.length < 1 && <h2>No reqeusts</h2>}
+        {reqs &&
+          reqs.map((req) => {
+            return (
+              <div key={req}>
+                <div>{req}</div>
+                <button
+                  onClick={() => {
+                    acceptReq(req);
+                  }}
+                >
+                  Accept
+                </button>
+                <button
+                  onClick={() => {
+                    declineReq(req);
+                  }}
+                >
+                  Decline
+                </button>
+              </div>
+            );
+          })}
+        <Link to={"/"}>
+          <button className={styles.home}>
+            <Home></Home>
+          </button>
+        </Link>
+      </main>
+    </>
   );
 }
 

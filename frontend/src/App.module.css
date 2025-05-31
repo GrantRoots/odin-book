@@ -10,6 +10,12 @@
   align-items: center;
 }
 
+.user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .button {
   height: 3rem;
   width: 7rem;
@@ -18,10 +24,76 @@
 }
 
 .loggedInContainer {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 70% 20%;
   justify-content: space-around;
   align-items: flex-start;
   width: 100%;
   height: 100%;
+  text-align: center;
+}
+
+.loggedInContainer h1 {
+  text-align: center;
+}
+
+.post {
+  background-color: white;
+  margin: 2rem;
+  padding: 2rem;
+  border-radius: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  color: black;
+}
+
+.post > * {
+  margin: 0.3rem;
+  overflow-wrap: break-word;
+  max-width: 80%;
+}
+
+.post svg {
+  height: 1.5rem;
+}
+
+.post button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.postIcons {
+  display: flex;
+}
+
+.likes {
+  display: flex;
+  align-items: center;
+}
+
+.peopleToFollow {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: white;
+  width: 100%;
+}
+
+.peopleToFollow h2 {
+  overflow-wrap: break-word;
+  width: 100%;
+  text-align: center;
+}
+
+.follow {
+  background-color: white;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.4rem;
+  cursor: pointer;
 }
