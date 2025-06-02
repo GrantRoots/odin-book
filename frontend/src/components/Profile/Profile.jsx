@@ -21,6 +21,9 @@ function Profile() {
       });
       if (!response.ok) return;
       const data = await response.json();
+      data.user.posts.sort((a, b) => {
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      });
       setProfile(data.user);
     } catch (error) {
       console.error(error);
