@@ -134,7 +134,9 @@ function App() {
           <div>
             <Link to={`/${user.id}`} className="link">
               <div className={styles.user}>
-                <span>{user.username}</span>
+                <span>
+                  <strong>{user.username}</strong>
+                </span>
                 <img
                   className={styles.profilePic}
                   src={`${API_URL}/${user.profilePic}`}
@@ -143,13 +145,13 @@ function App() {
               </div>
             </Link>
             <Link to={"customize"}>
-              <button className={styles.button}>Customize Profile</button>
+              <button>Customize Profile</button>
             </Link>
             <Link to={"requests"}>
-              <button className={styles.button}>Follow Requests</button>
+              <button>Follow Requests</button>
             </Link>
             <Link to={"create"}>
-              <button className={styles.button}>Create Post</button>
+              <button>Create Post</button>
             </Link>
           </div>
         )}
@@ -219,7 +221,7 @@ function App() {
                       <Link to={`post/${post.id}`}>
                         <button>
                           <span>
-                            <b>View Post / Comments</b>
+                            <strong>View Post / Comments</strong>
                           </span>
                         </button>
                       </Link>

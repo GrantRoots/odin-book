@@ -101,7 +101,10 @@ function Post() {
           <div key={post.id} className={styles.post}>
             <Link to={`/${post.userId}`} className="link">
               <span>
-                <u>{post.username}</u>
+                <u>
+                  {post.username}
+                  <strong>{post.username}</strong>
+                </u>
               </span>
             </Link>
             {post.image && (
