@@ -102,7 +102,6 @@ function Post() {
             <Link to={`/${post.userId}`} className="link">
               <span>
                 <u>
-                  {post.username}
                   <strong>{post.username}</strong>
                 </u>
               </span>
