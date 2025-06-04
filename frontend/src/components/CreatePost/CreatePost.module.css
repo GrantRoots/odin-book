@@ -14,6 +14,10 @@
   margin: 1rem;
 }
 
+.form textarea {
+  font-size: 1rem;
+}
+
 .content {
   height: 5rem;
   overflow-wrap: break-word;

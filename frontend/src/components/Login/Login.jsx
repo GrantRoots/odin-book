@@ -41,7 +41,7 @@ function Login() {
 
   return (
     <main className={styles.container}>
-      <h1>Login</h1>
+      <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <label htmlFor="username">
           <span>Username: </span>

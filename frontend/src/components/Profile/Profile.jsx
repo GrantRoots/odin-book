@@ -75,10 +75,8 @@ function Profile() {
                     })}
                   </div>
                   <div>Likes: {post.likes}</div>
-                  <Link to={`/post/${post.id}`}>
-                    <button>
-                      <span>View Post / Comments</span>
-                    </button>
+                  <Link to={`/post/${post.id}`} className="link">
+                    <span>View Post / Comments</span>
                   </Link>
                 </div>
               );

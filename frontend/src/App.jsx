@@ -35,7 +35,7 @@ function App() {
       setLoggedIn(true);
       getUser(userId);
     }
-  }, []);
+  }, [token]);
 
   async function getUserAndFollowingPosts() {
     try {
@@ -144,14 +144,14 @@ function App() {
                 />
               </div>
             </Link>
-            <Link to={"customize"}>
-              <button>Customize Profile</button>
+            <Link to={"customize"} className={styles.headerButton}>
+              Customize Profile
             </Link>
-            <Link to={"requests"}>
-              <button>Follow Requests</button>
+            <Link to={"requests"} className={styles.headerButton}>
+              Follow Requests
             </Link>
-            <Link to={"create"}>
-              <button>Create Post</button>
+            <Link to={"create"} className={styles.headerButton}>
+              Create Post
             </Link>
           </div>
         )}
@@ -159,16 +159,16 @@ function App() {
       <main className={styles.main}>
         {!loggedIn && (
           <div>
-            <div>
-              <Link to={"signup"}>
-                <button className={styles.button}>Sign Up</button>
+            <div className={styles.buttonContainer}>
+              <Link to={"signup"} className={styles.button}>
+                Sign Up
               </Link>
-              <Link to={"login"}>
-                <button className={styles.button}>Log In</button>
+              <Link to={"login"} className={styles.button}>
+                Log In
               </Link>
             </div>
-            <h2 style={{ color: "white" }}>Welcome To Odinstagram!</h2>
-            <h3 style={{ color: "white" }}>Sign Up To Get Started</h3>
+            <h2>Welcome To Odinstagram!</h2>
+            <h3>Sign Up To Get Started</h3>
           </div>
         )}
 
@@ -176,7 +176,7 @@ function App() {
           <div className={styles.container}>
             <div>
               <h2>
-                <u style={{ color: "white" }}>Your Feed</u>
+                <u>Your Feed</u>
               </h2>
               {posts.length < 1 && (
                 <span>No posts yet create one or follow some people :)</span>
@@ -213,17 +213,13 @@ function App() {
                           {post.likes}
                         </button>
                         <Link to={`post/${post.id}`}>
-                          <button>
-                            <Comment></Comment>
-                          </button>
+                          <Comment></Comment>
                         </Link>
                       </div>
-                      <Link to={`post/${post.id}`}>
-                        <button>
-                          <span>
-                            <strong>View Post / Comments</strong>
-                          </span>
-                        </button>
+                      <Link to={`post/${post.id}`} className="link">
+                        <span>
+                          <strong>View Post / Comments</strong>
+                        </span>
                       </Link>
                       <div>
                         {new Date(post.createdAt).toLocaleTimeString([], {

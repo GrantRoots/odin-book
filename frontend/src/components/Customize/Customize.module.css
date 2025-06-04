@@ -6,7 +6,8 @@
   font-size: 1.5rem;
 }
 
-.main input {
+.main input,
+.main textarea {
   font-size: 1rem;
 }
 
