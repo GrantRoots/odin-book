@@ -3,6 +3,7 @@ import styles from "./App.module.css";
 import { useEffect, useState } from "react";
 import "./index.css";
 import { Home, Like, Comment } from "./components/Icons/Icons";
+import { Header } from "./components/Header/Header";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -124,6 +125,11 @@ function App() {
     }
   }
 
+  function signOut() {
+    localStorage.clear();
+    window.location.reload();
+  }
+
   return (
     <>
       <header className={styles.header}>
@@ -153,6 +159,9 @@ function App() {
             <Link to={"create"} className={styles.headerButton}>
               Create Post
             </Link>
+            <button onClick={signOut} className={styles.headerButton}>
+              Sign Out
+            </button>
           </div>
         )}
       </header>

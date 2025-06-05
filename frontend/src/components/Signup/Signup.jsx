@@ -14,6 +14,11 @@ function Signup() {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
 
+    if (data.password !== data.confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
     try {
       const response = await fetch("http://localhost:3000/user/signup", {
         method: "POST",
@@ -27,7 +32,7 @@ function Signup() {
       if (response.ok) {
         navigate("/");
       } else {
-        setError("Sign Up failed please try again");
+        setError("Signup failed please try again");
       }
     } catch (err) {
       console.error("Network or server error:", err);
@@ -38,37 +43,47 @@ function Signup() {
     <>
       <main className={styles.container}>
         <h2>Sign Up</h2>
+        {error && (
+          <div role="alert" style={{ color: "red" }}>
+            {error}
+          </div>
+        )}
         <form onSubmit={onSubmit} className={styles.form}>
           <label htmlFor="username">
             <span>Username: </span>
           </label>
-          <input type="text" name="username" required />
+          <input type="text" name="username" id="username" required />
 
           <label htmlFor="password">
             <span>Password: </span>
           </label>
-          <input type="password" name="password" required />
+          <input type="password" name="password" id="password" required />
 
           <label htmlFor="confirmPassword">
             <span>Confirm Password: </span>
           </label>
-          <input type="password" name="confirmPassword" required />
+          <input
+            type="password"
+            name="confirmPassword"
+            id="confirmPassword"
+            required
+          />
 
           <label htmlFor="firstName">
             <span>First Name: </span>
           </label>
-          <input type="text" name="firstName" required />
+          <input type="text" name="firstName" id="firstName" required />
 
           <label htmlFor="lastName">
             <span>Last Name: </span>
           </label>
-          <input type="text" name="lastName" required />
+          <input type="text" name="lastName" id="lastName" required />
 
           <button type="submit" className={styles.submit}>
             Submit
           </button>
         </form>
-        {error && <div>{error}</div>}
+
         <Link to={"/"}>
           <span className={styles.home}>
             <Home></Home>

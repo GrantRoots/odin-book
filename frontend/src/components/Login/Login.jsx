@@ -46,12 +46,12 @@ function Login() {
         <label htmlFor="username">
           <span>Username: </span>
         </label>
-        <input type="text" name="username" />
+        <input id="username" type="text" name="username" />
 
         <label htmlFor="password">
           <span>Password: </span>
         </label>
-        <input type="password" name="password" />
+        <input id="password" type="password" name="password" />
 
         <button type="submit" className={styles.submit}>
           Submit
