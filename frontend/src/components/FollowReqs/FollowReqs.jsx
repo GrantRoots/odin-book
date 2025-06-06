@@ -80,7 +80,7 @@ function FollowReqs() {
         <h2>Follow Requests</h2>
         {reqs.length < 1 && (
           <div>
-            <span>No reqeusts</span>
+            <span>No requests</span>
           </div>
         )}
         {reqs &&

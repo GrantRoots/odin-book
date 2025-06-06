@@ -11,8 +11,8 @@ function App() {
   const [notFollowing, setNotFollowing] = useState([]);
   const [error, setError] = useState(null);
   const [user, setUser] = useState(null);
-  const userId = localStorage.getItem("userId");
-  const token = localStorage.getItem("token");
+  const [userId, setUserId] = useState(localStorage.getItem("userId"));
+  const [token, setToken] = useState(localStorage.getItem("token"));
   const API_URL = import.meta.env.VITE_API_URL;
 
   async function getUser(userId) {
