@@ -1,6 +1,6 @@
 const prisma = require("../prisma");
 
-async function getUserAndFollowingPosts(id) {
+async function getFeed(id) {
   id = parseInt(id);
   try {
     //get all users posts
@@ -145,7 +145,7 @@ async function postComment(comment, postId, userId) {
 }
 
 module.exports = {
-  getUserAndFollowingPosts,
+  getFeed,
   createPost,
   likePost,
   getPost,

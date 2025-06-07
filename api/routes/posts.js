@@ -5,7 +5,7 @@ const passport = require("passport");
 postsRouter.get(
   "/",
   passport.authenticate("jwt", { session: false }),
-  postsController.getUserAndFollowingPosts
+  postsController.getFeed
 );
 postsRouter.post(
   "/",

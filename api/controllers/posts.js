@@ -13,9 +13,9 @@ const upload = multer({
   },
 });
 
-async function getUserAndFollowingPosts(req, res, next) {
+async function getFeed(req, res, next) {
   try {
-    const data = await db.getUserAndFollowingPosts(req.query.id);
+    const data = await db.getFeed(req.query.id);
     return res.json({
       success: true,
       posts: data,
@@ -103,7 +103,7 @@ const postComment = [
 ];
 
 module.exports = {
-  getUserAndFollowingPosts,
+  getFeed,
   createPost,
   likePost,
   getPost,

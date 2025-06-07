@@ -38,7 +38,7 @@ function App() {
     }
   }, [token]);
 
-  async function getUserAndFollowingPosts() {
+  async function getFeed() {
     try {
       const response = await fetch(`${API_URL}/posts?id=${userId}`, {
         mode: "cors",
@@ -72,7 +72,7 @@ function App() {
 
   useEffect(() => {
     if (loggedIn) {
-      getUserAndFollowingPosts();
+      getFeed();
       getNotFollowing();
     }
   }, [loggedIn]);
@@ -119,7 +119,7 @@ function App() {
         body: JSON.stringify(data),
         mode: "cors",
       });
-      getUserAndFollowingPosts();
+      getFeed();
     } catch (err) {
       console.error("Network or server error:", err);
     }
