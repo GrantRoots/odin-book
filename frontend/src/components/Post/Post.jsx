@@ -60,11 +60,9 @@ function Post() {
   async function postComment(e) {
     e.preventDefault();
 
-    const data = {
-      comment: e.target.comment.value,
-      postId: postId,
-      userId: userId,
-    };
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+
     try {
       const response = await fetch(`${API_URL}/posts/comments`, {
         method: "POST",
@@ -119,6 +117,7 @@ function Post() {
                 <span>Likes: {post.likes}</span>
               </div>
               <button
+                aria-label="like post"
                 onClick={() => {
                   likePost(post.id);
                 }}
@@ -135,7 +134,9 @@ function Post() {
 
             <form onSubmit={postComment}>
               <label htmlFor="comment">Comment: </label>
-              <input type="text" name="comment" />
+              <input id="comment" type="text" name="comment" />
+              <input type="hidden" value={userId} name="userId" />
+              <input type="hidden" value={postId} name="postId" />
               <button type="submit">
                 <span className={styles.send}>Send</span>
               </button>
@@ -152,7 +153,7 @@ function Post() {
                 })
                 .reverse()}
             </div>
-            <Link to={"/"}>
+            <Link to={"/"} aria-label="home">
               <span>
                 <Home></Home>
               </span>

@@ -51,10 +51,15 @@ function CreatePost() {
           className={styles.form}
         >
           <div>
-            <label htmlFor="contnet">
+            <label htmlFor="content">
               <span>Content:</span>
             </label>
-            <textarea type="text" name="content" className={styles.content} />
+            <textarea
+              id="content"
+              type="text"
+              name="content"
+              className={styles.content}
+            />
           </div>
 
           <div>

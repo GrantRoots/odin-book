@@ -80,6 +80,7 @@ function Customize() {
             type="text"
             name="username"
             value={username}
+            id="username"
             onChange={(e) => {
               setUsername(e.target.value);
             }}
@@ -92,6 +93,7 @@ function Customize() {
             type="text"
             name="firstName"
             value={firstName}
+            id="firstName"
             onChange={(e) => {
               setFirstName(e.target.value);
             }}
@@ -104,6 +106,7 @@ function Customize() {
             type="text"
             name="lastName"
             value={lastName}
+            id="lastName"
             onChange={(e) => {
               setLastName(e.target.value);
             }}
@@ -116,6 +119,7 @@ function Customize() {
             type="text"
             name="bio"
             value={bio}
+            id="bio"
             onChange={(e) => {
               setBio(e.target.value);
             }}
@@ -125,9 +129,9 @@ function Customize() {
           <label htmlFor="profilePic">
             <span>Profile Picture: </span>
           </label>
-          <input type="file" name="profilePic" />
+          <input type="file" name="profilePic" id="profilePic" />
 
-          <input type="hidden" value={userId} name="userId" />
+          <input id="userId" type="hidden" value={userId} name="userId" />
 
           <button type="Submit" className={styles.update}>
             Update
