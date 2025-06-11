@@ -14,7 +14,6 @@ const userRouter = require("./routes/user");
 const postsRouter = require("./routes/posts");
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 passport.use(
   new LocalStrategy(async (username, password, done) => {
@@ -90,4 +89,4 @@ app.use((err, req, res, next) => {
   res.status(500).send(err.message);
 });
 
-app.listen(PORT);
+module.exports = app;

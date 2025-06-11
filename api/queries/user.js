@@ -88,7 +88,7 @@ async function sendFollowReq(followId, senderId) {
         id: followId,
       },
       data: {
-        followRequests: [...user.followRequests, senderId],
+        followRequests: [...user.followRequests, senderId.toString()],
       },
     });
     return true;
@@ -142,7 +142,7 @@ async function acceptReq(username, userId) {
         username: username,
       },
       data: {
-        following: [...reqUser.following, userId],
+        following: [...reqUser.following, userId.toString()],
       },
     });
     //then remove them from followReqs
@@ -168,7 +168,7 @@ async function acceptReq(username, userId) {
   }
 }
 
-async function declineReq(username, userId) {
+async function declineReq(reqUser, userId) {
   try {
     userId = parseInt(userId);
     const user = await prisma.user.findUnique({

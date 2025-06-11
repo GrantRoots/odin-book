@@ -189,17 +189,16 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
-        "fromEnvVar": "DATABASE_URL",
-        "value": null
+        "fromEnvVar": "TEST_DATABASE_URL",
+        "value": "postgresql://grantroots:Password@localhost:5432/test_odin_book"
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Session {\n  id        String   @id\n  sid       String   @unique\n  data      String\n  expiresAt DateTime\n}\n\nmodel User {\n  id             Int       @id @default(autoincrement())\n  username       String    @unique @db.VarChar(255)\n  password       String\n  firstName      String    @db.VarChar(255)\n  lastName       String    @db.VarChar(255)\n  profilePic     String    @default(\"uploads/default.jpg\")\n  bio            String?\n  followRequests String[]\n  following      String[]\n  posts          Post[]\n  comments       Comment[]\n}\n\nmodel Post {\n  id        Int       @id @default(autoincrement())\n  image     String?\n  content   String    @db.VarChar(1000)\n  createdAt DateTime  @default(now())\n  likes     Int       @default(0)\n  user      User      @relation(fields: [userId], references: [id])\n  userId    Int\n  comments  Comment[]\n}\n\nmodel Comment {\n  id        Int      @id @default(autoincrement())\n  text      String   @db.VarChar(255)\n  user      User     @relation(fields: [userId], references: [id])\n  userId    Int\n  post      Post     @relation(fields: [postId], references: [id])\n  postId    Int\n  createdAt DateTime @default(now())\n}\n",
-  "inlineSchemaHash": "620291cac47b947c32e909de1e60c3ab7b8f01fc6df752b88fed269825ab272a",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"TEST_DATABASE_URL\")\n}\n\nmodel Session {\n  id        String   @id\n  sid       String   @unique\n  data      String\n  expiresAt DateTime\n}\n\nmodel User {\n  id             Int       @id @default(autoincrement())\n  username       String    @unique @db.VarChar(255)\n  password       String\n  firstName      String    @db.VarChar(255)\n  lastName       String    @db.VarChar(255)\n  profilePic     String    @default(\"uploads/default.jpg\")\n  bio            String?\n  followRequests String[]\n  following      String[]\n  posts          Post[]\n  comments       Comment[]\n}\n\nmodel Post {\n  id        Int       @id @default(autoincrement())\n  image     String?\n  content   String    @db.VarChar(1000)\n  createdAt DateTime  @default(now())\n  likes     Int       @default(0)\n  user      User      @relation(fields: [userId], references: [id])\n  userId    Int\n  comments  Comment[]\n}\n\nmodel Comment {\n  id        Int      @id @default(autoincrement())\n  text      String   @db.VarChar(255)\n  user      User     @relation(fields: [userId], references: [id])\n  userId    Int\n  post      Post     @relation(fields: [postId], references: [id])\n  postId    Int\n  createdAt DateTime @default(now())\n}\n",
+  "inlineSchemaHash": "fd2a2f45871e69c7c56c6fee188a8c69b0a5533576d910c9c373e084acaf015e",
   "copyEngine": true
 }
 config.dirname = '/'
@@ -211,7 +210,7 @@ config.compilerWasm = undefined
 
 config.injectableEdgeEnv = () => ({
   parsed: {
-    DATABASE_URL: typeof globalThis !== 'undefined' && globalThis['DATABASE_URL'] || typeof process !== 'undefined' && process.env && process.env.DATABASE_URL || undefined
+    TEST_DATABASE_URL: typeof globalThis !== 'undefined' && globalThis['TEST_DATABASE_URL'] || typeof process !== 'undefined' && process.env && process.env.TEST_DATABASE_URL || undefined
   }
 })
 
