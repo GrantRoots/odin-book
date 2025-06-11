@@ -5,43 +5,17 @@ const passport = require("passport");
 userRouter.post("/signup", userController.signUp);
 userRouter.post("/login", userController.logIn);
 
-userRouter.get(
-  "/requests",
-  passport.authenticate("jwt", { session: false }),
-  userController.getReqs
-);
-userRouter.post(
-  "/requests/accept",
-  passport.authenticate("jwt", { session: false }),
-  userController.acceptReq
-);
-userRouter.post(
-  "/requests/decline",
-  passport.authenticate("jwt", { session: false }),
-  userController.declineReq
-);
+userRouter.use(passport.authenticate("jwt", { session: false }));
 
-userRouter.put(
-  "/",
-  passport.authenticate("jwt", { session: false }),
-  userController.updateProfile
-);
+userRouter.get("/requests", userController.getReqs);
+userRouter.post("/requests/accept", userController.acceptReq);
+userRouter.post("/requests/decline", userController.declineReq);
 
-userRouter.get(
-  "/",
-  passport.authenticate("jwt", { session: false }),
-  userController.getNotFollowing
-);
-userRouter.get(
-  "/:userId",
-  passport.authenticate("jwt", { session: false }),
-  userController.getUser
-);
+userRouter.put("/", userController.updateProfile);
 
-userRouter.post(
-  "/follow",
-  passport.authenticate("jwt", { session: false }),
-  userController.sendFollowReq
-);
+userRouter.get("/", userController.getNotFollowing);
+userRouter.get("/:userId", userController.getUser);
+
+userRouter.post("/follow", userController.sendFollowReq);
 
 module.exports = userRouter;

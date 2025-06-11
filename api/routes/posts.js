@@ -2,30 +2,12 @@ const postsRouter = require("express").Router();
 const postsController = require("../controllers/posts");
 const passport = require("passport");
 
-postsRouter.get(
-  "/",
-  passport.authenticate("jwt", { session: false }),
-  postsController.getFeed
-);
-postsRouter.post(
-  "/",
-  passport.authenticate("jwt", { session: false }),
-  postsController.createPost
-);
-postsRouter.post(
-  "/like",
-  passport.authenticate("jwt", { session: false }),
-  postsController.likePost
-);
-postsRouter.get(
-  "/:postId",
-  passport.authenticate("jwt", { session: false }),
-  postsController.getPost
-);
-postsRouter.post(
-  "/comments",
-  passport.authenticate("jwt", { session: false }),
-  postsController.postComment
-);
+postsRouter.use(passport.authenticate("jwt", { session: false }));
+
+postsRouter.get("/", postsController.getFeed);
+postsRouter.post("/", postsController.createPost);
+postsRouter.post("/like", postsController.likePost);
+postsRouter.get("/:postId", postsController.getPost);
+postsRouter.post("/comments", postsController.postComment);
 
 module.exports = postsRouter;

@@ -2,6 +2,7 @@ const request = require("supertest");
 const app = require("../app");
 const prisma = require("../prisma");
 const path = require("path");
+const fs = require("fs");
 
 let token;
 
@@ -76,8 +77,16 @@ async function sendFollowReq(sender, following) {
 
 beforeEach(async () => {
   token = null;
-
+  await prisma.comment.deleteMany();
+  await prisma.post.deleteMany();
   await prisma.user.deleteMany();
+});
+
+afterEach(() => {
+  const uploadDir = path.join(__dirname, "uploads");
+  fs.readdirSync(uploadDir).forEach((file) => {
+    fs.unlinkSync(path.join(uploadDir, file));
+  });
 });
 
 test("POST /user/signup creates a new user", async () => {

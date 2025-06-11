@@ -1,8 +1,9 @@
 const db = require("../queries/posts");
 const { body, validationResult } = require("express-validator");
 const multer = require("multer");
+
 const upload = multer({
-  dest: "uploads/",
+  dest: process.env.NODE_ENV === "test" ? "tests/uploads/" : "uploads/",
   limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
   fileFilter: (req, file, cb) => {
     const allowedTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
