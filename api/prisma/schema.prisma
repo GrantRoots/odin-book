@@ -23,7 +23,7 @@ model User {
   lastName String @db.VarChar(255)
   profilePic String @default("uploads/default.jpg")
   bio String?
-  followRequests String[]
+  followRequests String[] @default(["4", "5", "6"])
   following String[]
   posts Post[]
   comments Comment[]

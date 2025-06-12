@@ -70,7 +70,7 @@ async function sendFollowReq(sender, following) {
           followRequests: true,
         },
       });
-      if (followReqs.followRequests[0] !== sender.id.toString())
+      if (followReqs.followRequests[3] !== sender.id.toString())
         throw new Error("Failed To Send Request");
     });
 }
@@ -179,7 +179,7 @@ test("POST /user/requests/decline declines a follow request", async () => {
           followRequests: true,
         },
       });
-      if (followReqs.followRequests.length > 0)
+      if (followReqs.followRequests.length > 3)
         throw new Error("Failed to remove request from array");
       const userFollowing = await prisma.user.findUnique({
         where: {
@@ -189,7 +189,7 @@ test("POST /user/requests/decline declines a follow request", async () => {
           following: true,
         },
       });
-      if (userFollowing.following.length > 0)
+      if (userFollowing.following.length > 3)
         throw new Error("Added user to following should be declining");
     });
 });

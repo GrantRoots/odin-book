@@ -35,14 +35,16 @@ async function getFeed(id) {
             },
           },
         });
-        const followingPostsWithUsername = followData.posts.map((post) => {
-          return {
-            ...post,
-            username: followData.username,
-            profilePic: followData.profilePic,
-          };
-        });
-        return followingPostsWithUsername;
+        if (followData) {
+          const followingPostsWithUsername = followData.posts.map((post) => {
+            return {
+              ...post,
+              username: followData.username,
+              profilePic: followData.profilePic,
+            };
+          });
+          return followingPostsWithUsername;
+        }
       })
     );
 

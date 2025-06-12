@@ -47,8 +47,7 @@ const signUp = [
         req.body.username,
         await bcrypt.hash(req.body.password, 10),
         req.body.firstName,
-        req.body.lastName,
-        req.body.author
+        req.body.lastName
       );
       res.status(201).end();
     } catch (error) {

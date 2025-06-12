@@ -8,7 +8,15 @@ async function signUp(username, hashedPassword, firstName, lastName, author) {
         password: hashedPassword,
         firstName: firstName,
         lastName: lastName,
-        author: author,
+      },
+    });
+    //have them follow 3 default users
+    await prisma.user.update({
+      where: {
+        username: username,
+      },
+      data: {
+        following: ["1", "2", "3"],
       },
     });
   } catch (error) {
@@ -119,7 +127,9 @@ async function getReqs(id) {
             username: true,
           },
         });
-        return username.username;
+        if (username) {
+          return username.username;
+        }
       })
     );
     return usernameList;
