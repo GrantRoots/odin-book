@@ -33,7 +33,7 @@ async function addInitialUsersAndPosts() {
       lastName: "Guy",
     },
     {
-      username: "definetlyNotGrantRoots",
+      username: "definitelyNotGrantRoots",
       password: await bcrypt.hash("password", 10),
       firstName: "Cool",
       lastName: "Dude",
