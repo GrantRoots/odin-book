@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "build": "prisma generate && npx prisma migrate deploy",
+    "build": "prisma generate && npx prisma migrate deploy && node seed.js",
     "start": "node server.js",
     "dev": "NODE_ENV=development && node server.js",
     "test": "NODE_ENV=test && jest",
