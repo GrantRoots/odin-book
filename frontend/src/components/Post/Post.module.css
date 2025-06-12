@@ -9,6 +9,7 @@
   align-items: center;
   text-align: center;
   color: black;
+  min-width: 50%;
 }
 
 .post > * {
