@@ -7,6 +7,7 @@ import { Home } from "../Icons/Icons";
 function Signup() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const API_URL = import.meta.env.VITE_API_URL;
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -20,7 +21,7 @@ function Signup() {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/user/signup", {
+      const response = await fetch(`${API_URL}/user/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
